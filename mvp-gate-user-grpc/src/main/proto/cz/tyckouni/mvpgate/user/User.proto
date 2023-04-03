@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package cz.tyckouni.mvpgate.user;
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "cz.tyckouni.mvpgate.user.grpc";
+
+service UserService {
+  rpc findByGuid(mvpgate.user.ByGuidRequest) returns (UserGrpc) {}
+  rpc create(mvpgate.user.CreateRequest) returns (UserGrpc) {}
+  rpc findUsersByFirstName(mvpgate.user.ByFirstNameRequest) returns (UsersGrpc) {}
+  rpc findUsersByLastName(mvpgate.user.ByLastNameRequest) returns (UsersGrpc) {}
+  rpc delete(mvpgate.user.ByGuidRequest) returns (google.protobuf.Empty) {}
+}
+
+message UserGrpc {
+  string guid = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
+
+message UsersGrpc {
+  repeated UserGrpc users = 1;
+}
+
+message CreateRequest {
+  string firstName = 1;
+  string lastName = 2;
+}
+
+message ByFirstNameRequest {
+  string firstName = 1;
+}
+
+message ByLastNameRequest {
+  string lastName = 1;
+}
+
+message ByGuidRequest {
+  string guid = 1;
+}

@@ -51,6 +51,16 @@
 			<!-- start of mvp-gate dependencies -->
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
+				<artifactId>mvp-gate-user</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.tyckouni</groupId>
+				<artifactId>mvp-gate-party</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.tyckouni</groupId>
 				<artifactId>mvp-gate-user-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>

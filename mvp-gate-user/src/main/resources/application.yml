@@ -1,4 +1,8 @@
+grpc:
+  port: 6565
 logging:
+  level:
+    cz.tyckouni.mvpgate: debug
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
 management:
@@ -13,16 +17,14 @@ management:
   tracing:
     sampling:
       probability: 1.0
-server:
-  port: 8081
 spring:
   application:
     name: user
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: ${MVP_USER_DB_USER:mvp}
-    password: ${MVP_USER_DB_PASSWORD:mvp}
-    url: jdbc:postgresql://${MVP_USER_HOST:localhost}:${MVP_USER_PORT:5432}/${MVP_USER_DB_NAME:mvp_party}
+    username: ${MVP_PARTY_DB_USER:mvp}
+    password: ${MVP_PARTY_DB_PASSWORD:mvp}
+    url: jdbc:postgresql://${MVP_PARTY_HOST:localhost}:${MVP_PARTY_PORT:5432}/${MVP_PARTY_DB_NAME:mvp_user}
   jpa:
     hibernate:
       ddl-auto: update # temporary for easy development
