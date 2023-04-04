@@ -1,12 +1,13 @@
 package cz.tyckouni.mvpgate.party.persistence.idp
 
 import cz.tyckouni.mvpgate.party.persistence.PartyEntity
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 
 /**
  * Idp DB entity.
  */
-@Entity
+@Entity(name = "idp")
 class Idp(
-    var name: String,
+    @Column(name = "name", nullable = false) var name: String,
 ) : PartyEntity()
