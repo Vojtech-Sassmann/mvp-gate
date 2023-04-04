@@ -10,5 +10,5 @@ interface LoginMethodRepository : PartyRepository<LoginMethod> {
     /**
      * Find all login methods for given Service provider by its id
      */
-    fun findBySpId(spId: Long) : Set<LoginMethod>
+    fun findBySpId(spId: Long): Set<LoginMethod>
 }

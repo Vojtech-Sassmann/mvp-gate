@@ -15,5 +15,5 @@ class LoginMethod(
 
     @ManyToOne
     @JoinColumn(name = "idp_id", nullable = false)
-    var idp: Idp
+    var idp: Idp,
 ) : PartyEntity()

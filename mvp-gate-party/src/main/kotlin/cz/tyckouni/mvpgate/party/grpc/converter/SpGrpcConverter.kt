@@ -2,7 +2,6 @@ package cz.tyckouni.mvpgate.party.grpc.converter
 
 import cz.tyckouni.mvpgate.party.grpc.SpGrpc
 import cz.tyckouni.mvpgate.party.grpc.SpsGrpc
-import cz.tyckouni.mvpgate.party.grpc.converter.GrpcConverter
 import cz.tyckouni.mvpgate.party.persistence.entity.Sp
 
 /**
