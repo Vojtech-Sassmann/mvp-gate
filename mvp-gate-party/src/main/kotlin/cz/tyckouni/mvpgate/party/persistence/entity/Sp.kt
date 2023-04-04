@@ -5,7 +5,7 @@ import jakarta.persistence.Entity
 /**
  * Sp DB entity.
  */
-@Entity
+@Entity(name = "sp")
 class Sp(
     var name: String,
 ) : PartyEntity()

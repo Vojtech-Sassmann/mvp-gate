@@ -1,16 +1,16 @@
 package cz.tyckouni.mvpgate.party.persistence.entity
 
 import jakarta.persistence.Column
-import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.MappedSuperclass
 import java.util.UUID
 
 /**
  * Base class of all party DB entities.
  */
-@Entity
+@MappedSuperclass
 open class PartyEntity(
     @Column(name = "guid", nullable = false)
     open var guid: UUID = UUID.randomUUID(),

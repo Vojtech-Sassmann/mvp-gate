@@ -20,5 +20,6 @@ class PartyMvpGateApplicationTests(
         println(savedIdp)
 
         assertThat(savedIdp.id).isNotNull
+        assertThat(savedIdp.guid).isNotNull
     }
 }
