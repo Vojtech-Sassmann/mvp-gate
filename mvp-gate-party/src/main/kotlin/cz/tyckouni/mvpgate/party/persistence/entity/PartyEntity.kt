@@ -1,4 +1,4 @@
-package cz.tyckouni.mvpgate.party.persistence
+package cz.tyckouni.mvpgate.party.persistence.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

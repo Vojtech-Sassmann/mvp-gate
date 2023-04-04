@@ -2,7 +2,7 @@ package cz.tyckouni.mvpgate.party.grpc
 
 import cz.tyckouni.mvpgate.grpc.ByGuidRequest
 import cz.tyckouni.mvpgate.party.business.idp.IdpService
-import cz.tyckouni.mvpgate.party.grpc.converter.idp.IdpGrpcConverter
+import cz.tyckouni.mvpgate.party.grpc.converter.IdpGrpcConverter
 import io.micrometer.tracing.Tracer
 import org.lognet.springboot.grpc.GRpcService
 import org.slf4j.LoggerFactory

@@ -1,8 +1,8 @@
 package cz.tyckouni.mvpgate.party.business.sp
 
 import cz.tyckouni.mvpgate.party.business.Service
-import cz.tyckouni.mvpgate.party.persistence.sp.Sp
-import java.util.*
+import cz.tyckouni.mvpgate.party.persistence.entity.Sp
+import java.util.UUID
 
 interface SpService : Service<Sp> {
 

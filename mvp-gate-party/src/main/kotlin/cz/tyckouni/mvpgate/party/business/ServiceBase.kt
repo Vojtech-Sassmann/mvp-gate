@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.business
 
-import cz.tyckouni.mvpgate.party.persistence.PartyEntity
-import cz.tyckouni.mvpgate.party.persistence.PartyRepository
+import cz.tyckouni.mvpgate.party.persistence.entity.PartyEntity
+import cz.tyckouni.mvpgate.party.persistence.repository.PartyRepository
 import java.util.Objects
 import java.util.Optional
 import java.util.UUID

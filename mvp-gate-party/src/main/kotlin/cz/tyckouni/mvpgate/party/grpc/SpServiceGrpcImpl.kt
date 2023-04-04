@@ -3,7 +3,7 @@ package cz.tyckouni.mvpgate.party.grpc
 import com.google.protobuf.Empty
 import cz.tyckouni.mvpgate.grpc.ByGuidRequest
 import cz.tyckouni.mvpgate.party.business.sp.SpService
-import cz.tyckouni.mvpgate.party.grpc.converter.sp.SpGrpcConverter
+import cz.tyckouni.mvpgate.party.grpc.converter.SpGrpcConverter
 import io.micrometer.tracing.Tracer
 import org.lognet.springboot.grpc.GRpcService
 import org.slf4j.LoggerFactory

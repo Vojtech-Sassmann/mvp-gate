@@ -1,6 +1,5 @@
-package cz.tyckouni.mvpgate.party.persistence.sp
+package cz.tyckouni.mvpgate.party.persistence.entity
 
-import cz.tyckouni.mvpgate.party.persistence.PartyEntity
 import jakarta.persistence.Entity
 
 /**
