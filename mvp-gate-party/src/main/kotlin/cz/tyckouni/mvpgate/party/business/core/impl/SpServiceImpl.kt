@@ -1,6 +1,7 @@
-package cz.tyckouni.mvpgate.party.business.sp
+package cz.tyckouni.mvpgate.party.business.core.impl
 
-import cz.tyckouni.mvpgate.party.business.ServiceBase
+import cz.tyckouni.mvpgate.party.business.core.ServiceBase
+import cz.tyckouni.mvpgate.party.business.core.SpService
 import cz.tyckouni.mvpgate.party.persistence.entity.Sp
 import cz.tyckouni.mvpgate.party.persistence.repository.SpRepository
 import org.springframework.stereotype.Service
