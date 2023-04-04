@@ -7,6 +7,9 @@ import cz.tyckouni.mvpgate.party.persistence.repository.SpRepository
 import org.springframework.stereotype.Service
 import java.util.*
 
+/**
+ * Business service for [Sp] entity management
+ */
 @Service
 class SpServiceImpl(
     private val spRepository: SpRepository,

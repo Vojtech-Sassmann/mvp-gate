@@ -6,6 +6,9 @@ import java.util.Objects
 import java.util.Optional
 import java.util.UUID
 
+/**
+ * Shared implementation of business logic for party entities
+ */
 open class ServiceBase<T : PartyEntity>(
     private val repository: PartyRepository<T>,
 ) : Service<T> {

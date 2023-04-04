@@ -6,6 +6,9 @@ import cz.tyckouni.mvpgate.party.persistence.entity.Idp
 import cz.tyckouni.mvpgate.party.persistence.repository.IdpRepository
 import org.springframework.stereotype.Service
 
+/**
+ * Base implementation of [IdpService]
+ */
 @Service
 class IdpServiceImpl(
     idpRepository: IdpRepository,
