@@ -1,16 +1,33 @@
 syntax = "proto3";
 import "mvpgate/Base.proto";
+import "google/protobuf/empty.proto";
 
 package cz.tyckouni.mvpgate.party;
+
 
 option java_multiple_files = true;
 option java_package = "cz.tyckouni.mvpgate.party.grpc";
 
 service SpService {
-  rpc findByGuid(mvpgate.ByGuidRequest) returns (SpGrpc) {}
+  rpc findByGuid(ByGuidRequest) returns (SpGrpc) {}
+  rpc create(CreateSpRequest) returns (SpGrpc) {}
+  rpc findByName(ByNameRequest) returns (SpsGrpc) {}
+  rpc delete(ByGuidRequest) returns (google.protobuf.Empty) {}
 }
 
 message SpGrpc {
   string guid = 1;
   string name = 2;
+}
+
+message SpsGrpc {
+  repeated SpGrpc sps = 1;
+}
+
+message CreateSpRequest {
+  string name = 1;
+}
+
+message ByNameRequest {
+  string name = 1;
 }

@@ -1,6 +1,7 @@
 package cz.tyckouni.mvpgate.party.grpc.converter.sp
 
 import cz.tyckouni.mvpgate.party.grpc.SpGrpc
+import cz.tyckouni.mvpgate.party.grpc.SpsGrpc
 import cz.tyckouni.mvpgate.party.persistence.sp.Sp
 import org.springframework.stereotype.Component
 
@@ -14,5 +15,15 @@ class SpGrpcConverterImpl : SpGrpcConverter {
             .setGuid(dbEntity.guid.toString())
             .setName(dbEntity.name)
             .build()
+    }
+
+    override fun toListGrpc(dbEntities: List<Sp>): SpsGrpc {
+        var builder = SpsGrpc.newBuilder()
+
+        builder.addAllSps(
+            dbEntities.map { toGrpc(it) },
+        )
+
+        return builder.build()
     }
 }

@@ -4,8 +4,22 @@ import cz.tyckouni.mvpgate.party.business.ServiceBase
 import cz.tyckouni.mvpgate.party.persistence.sp.Sp
 import cz.tyckouni.mvpgate.party.persistence.sp.SpRepository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class SpServiceImpl(
-    spRepository: SpRepository,
-) : ServiceBase<Sp>(spRepository), SpService
+    private val spRepository: SpRepository,
+) : ServiceBase<Sp>(spRepository), SpService {
+
+    override fun findByName(name: String): Set<Sp> {
+        return spRepository.findByName(Objects.requireNonNull(name, "name cannot be null"))
+    }
+
+    override fun create(name: String): Sp {
+        return spRepository.save(Sp(name))
+    }
+
+    override fun delete(guid: UUID) {
+        spRepository.delete(findByGuid(guid).get())
+    }
+}
