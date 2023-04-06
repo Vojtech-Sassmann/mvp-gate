@@ -1,8 +1,9 @@
-package cz.tyckouni.mvpgate.party.grpc.converter.sp
+package cz.tyckouni.mvpgate.party.grpc.converter.impl
 
 import cz.tyckouni.mvpgate.party.grpc.SpGrpc
 import cz.tyckouni.mvpgate.party.grpc.SpsGrpc
-import cz.tyckouni.mvpgate.party.persistence.sp.Sp
+import cz.tyckouni.mvpgate.party.grpc.converter.SpGrpcConverter
+import cz.tyckouni.mvpgate.party.persistence.entity.Sp
 import org.springframework.stereotype.Component
 
 /**
@@ -18,12 +19,8 @@ class SpGrpcConverterImpl : SpGrpcConverter {
     }
 
     override fun toListGrpc(dbEntities: List<Sp>): SpsGrpc {
-        var builder = SpsGrpc.newBuilder()
-
-        builder.addAllSps(
-            dbEntities.map { toGrpc(it) },
-        )
-
-        return builder.build()
+        return SpsGrpc.newBuilder()
+            .addAllSps(dbEntities.map { toGrpc(it) })
+            .build()
     }
 }

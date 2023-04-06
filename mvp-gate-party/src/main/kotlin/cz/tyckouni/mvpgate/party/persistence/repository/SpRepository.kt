@@ -1,7 +1,6 @@
-package cz.tyckouni.mvpgate.party.persistence.sp
+package cz.tyckouni.mvpgate.party.persistence.repository
 
-import cz.tyckouni.mvpgate.party.persistence.PartyRepository
-import java.util.*
+import cz.tyckouni.mvpgate.party.persistence.entity.Sp
 
 interface SpRepository : PartyRepository<Sp> {
 

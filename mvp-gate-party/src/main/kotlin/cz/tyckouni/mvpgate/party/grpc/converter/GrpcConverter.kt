@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.grpc.converter
 
-import cz.tyckouni.mvpgate.party.persistence.PartyEntity
+import cz.tyckouni.mvpgate.party.persistence.entity.PartyEntity
 
 /**
  * Converter between DB and gRPC entities.

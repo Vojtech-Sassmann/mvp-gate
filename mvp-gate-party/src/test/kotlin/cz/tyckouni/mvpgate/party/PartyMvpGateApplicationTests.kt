@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party
 
-import cz.tyckouni.mvpgate.party.persistence.idp.Idp
-import cz.tyckouni.mvpgate.party.persistence.idp.IdpRepository
+import cz.tyckouni.mvpgate.party.persistence.entity.Idp
+import cz.tyckouni.mvpgate.party.persistence.repository.IdpRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,5 +20,6 @@ class PartyMvpGateApplicationTests(
         println(savedIdp)
 
         assertThat(savedIdp.id).isNotNull
+        assertThat(savedIdp.guid).isNotNull
     }
 }
