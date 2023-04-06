@@ -5,7 +5,7 @@ import cz.tyckouni.mvpgate.party.business.core.SpService
 import cz.tyckouni.mvpgate.party.persistence.entity.Sp
 import cz.tyckouni.mvpgate.party.persistence.repository.SpRepository
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 
 /**
  * Business service for [Sp] entity management
@@ -16,7 +16,7 @@ class SpServiceImpl(
 ) : ServiceBase<Sp>(spRepository), SpService {
 
     override fun findByName(name: String): Set<Sp> {
-        return spRepository.findByName(Objects.requireNonNull(name, "name cannot be null"))
+        return spRepository.findByName(name)
     }
 
     override fun create(name: String): Sp {
