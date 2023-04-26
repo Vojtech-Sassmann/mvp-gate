@@ -15,6 +15,11 @@ management:
   tracing:
     sampling:
       probability: 1.0
+mvp:
+  party:
+    grpc:
+      host: ${MVP_PARTY_GRPC_HOST:localhost}
+      port: ${MVP_PARTY_GRPC_PORT:6566}
 spring:
   application:
     name: auth
