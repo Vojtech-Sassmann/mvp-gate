@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.lognet.springboot.grpc.autoconfigure.GRpcServerProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.DirtiesContext
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
@@ -17,7 +16,6 @@ import org.springframework.test.annotation.DirtiesContext
         "grpc.shutdownGrace=-1",
     ],
 )
-@DirtiesContext
 class IdpServiceGrpcIntegrationTests(
     @Autowired
     val gRpcServerProperties: GRpcServerProperties,

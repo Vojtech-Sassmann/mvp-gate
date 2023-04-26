@@ -1,5 +1,5 @@
 grpc:
-  port: 6565
+  port: ${MVP_PARTY_GRPC_PORT:6566}
 logging:
   level:
     cz.tyckouni.mvpgate: debug

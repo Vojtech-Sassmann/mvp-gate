@@ -19,17 +19,14 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-kotlin-stub</artifactId>
-            <version>${grpc.kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
-            <version>${java.grpc.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-kotlin</artifactId>
-            <version>${protobuf.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -54,12 +51,14 @@
                             <goal>compile-custom</goal>
                         </goals>
                         <configuration>
+                            <!--suppress UnresolvedMavenProperty -->
                             <protocArtifact>
                                 com.google.protobuf:protoc:${protobuf.protoc.version}:exe:${os.detected.classifier}
                             </protocArtifact>
                             <pluginId>grpc-java</pluginId>
+                            <!--suppress UnresolvedMavenProperty -->
                             <pluginArtifact>
-                                io.grpc:protoc-gen-grpc-java:${java.grpc.version}:exe:${os.detected.classifier}
+                                io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
                             </pluginArtifact>
                             <protocPlugins>
                                 <protocPlugin>
@@ -79,6 +78,7 @@
                             <goal>compile-custom</goal>
                         </goals>
                         <configuration>
+                            <!--suppress UnresolvedMavenProperty -->
                             <protocArtifact>
                                 com.google.protobuf:protoc:${protobuf.protoc.version}:exe:${os.detected.classifier}
                             </protocArtifact>

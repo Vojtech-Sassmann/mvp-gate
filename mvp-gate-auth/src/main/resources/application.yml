@@ -1,0 +1,25 @@
+logging:
+  level:
+    cz.tyckouni.mvpgate: debug
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,startup
+  tracing:
+    sampling:
+      probability: 1.0
+mvp:
+  party:
+    grpc:
+      host: ${MVP_PARTY_GRPC_HOST:localhost}
+      port: ${MVP_PARTY_GRPC_PORT:6566}
+spring:
+  application:
+    name: auth
