@@ -16,14 +16,14 @@
     <name>mvp-gate</name>
 
     <modules>
-        <module>mvp-gate-party</module>
-		<module>mvp-gate-party-grpc</module>
-        <module>mvp-gate-party-grpc-client</module>
-        <module>mvp-gate-user</module>
-		<module>mvp-gate-user-client</module>
-		<module>mvp-gate-user-grpc</module>
-		<module>mvp-gate-grpc</module>
-        <module>mvp-gate-auth</module>
+        <module>party</module>
+		<module>party-grpc</module>
+        <module>party-grpc-client</module>
+        <module>user</module>
+		<module>user-client</module>
+		<module>user-grpc</module>
+		<module>grpc</module>
+        <module>auth</module>
     </modules>
     <properties>
 	    
