@@ -24,7 +24,8 @@
 		<module>user-grpc</module>
 		<module>grpc</module>
         <module>auth</module>
-    </modules>
+		<module>telemetry</module>
+	</modules>
     <properties>
 	    
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,6 +73,11 @@
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
 				<artifactId>mvp-gate-grpc</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.tyckouni</groupId>
+				<artifactId>mvp-gate-telemetry</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<!-- end of mvp-gate dependencies -->
