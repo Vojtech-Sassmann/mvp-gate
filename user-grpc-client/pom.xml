@@ -10,5 +10,5 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>mvp-gate-user-client</artifactId>
+    <artifactId>mvp-gate-user-grpc-client</artifactId>
 </project>

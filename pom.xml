@@ -20,7 +20,7 @@
 		<module>party-grpc</module>
         <module>party-grpc-client</module>
         <module>user</module>
-		<module>user-client</module>
+		<module>user-grpc-client</module>
 		<module>user-grpc</module>
 		<module>grpc</module>
         <module>auth</module>
@@ -51,7 +51,7 @@
 			<!-- start of mvp-gate dependencies -->
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-user-client</artifactId>
+				<artifactId>mvp-gate-user-grpc-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
