@@ -18,7 +18,6 @@ internal class ListIdpsInteractorTest {
 
     private val fetchIdpPage = mock(FetchIdpPage::class.java)
     private val listIdpsInteractor = ListIdpsInteractor(fetchIdpPage)
-
     private val pageRequestCaptor = argumentCaptor<PageRequest>()
 
     @Test
