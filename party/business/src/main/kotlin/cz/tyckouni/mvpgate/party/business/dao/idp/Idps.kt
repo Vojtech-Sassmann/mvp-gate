@@ -4,7 +4,12 @@ import cz.tyckouni.mvpgate.party.business.entity.Idp
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
 
-interface FetchIdpPage {
+interface Idps {
+
+    /**
+     * Persist given [Idp]
+     */
+    fun save(idp: Idp)
 
     /**
      * Fetch from storage a [Page] of [Idp] by given [pageRequest]

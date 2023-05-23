@@ -1,6 +1,7 @@
 package cz.tyckouni.mvpgate.party.business.usecase.list.idp
 
-import cz.tyckouni.mvpgate.party.business.dao.idp.FetchIdpPage
+import cz.tyckouni.mvpgate.party.business.dao.idp.Idps
+import cz.tyckouni.mvpgate.party.business.entity.CommonIdp
 import cz.tyckouni.mvpgate.party.business.entity.Idp
 import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
@@ -16,20 +17,20 @@ import org.mockito.kotlin.argumentCaptor
  */
 internal class ListIdpsInteractorTest {
 
-    private val fetchIdpPage = mock(FetchIdpPage::class.java)
-    private val listIdpsInteractor = ListIdpsInteractor(fetchIdpPage)
+    private val idps = mock(Idps::class.java)
+    private val listIdpsInteractor = ListIdpsInteractor(idps)
     private val pageRequestCaptor = argumentCaptor<PageRequest>()
 
     @Test
     fun list() {
         val foundIdps = listOf(
-            Idp("guid", "name", "https://login"),
-            Idp("guid-o", "name-o", "https://login-o"),
+            CommonIdp("guid", "name", "https://login"),
+            CommonIdp("guid-o", "name-o", "https://login-o"),
         )
-        val expectedPage = Page(foundIdps, 0, 1)
+        val expectedPage = Page<Idp>(foundIdps, 0, 1)
         val pageRequest = PageRequest(0, 1, "guid", Order.ASCENDING)
 
-        `when`(fetchIdpPage.find(pageRequestCaptor.capture()))
+        `when`(idps.find(pageRequestCaptor.capture()))
             .thenReturn(expectedPage)
 
         val result = listIdpsInteractor.list(pageRequest)

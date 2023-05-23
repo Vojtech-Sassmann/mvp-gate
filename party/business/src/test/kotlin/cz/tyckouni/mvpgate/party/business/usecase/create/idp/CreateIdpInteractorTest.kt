@@ -1,7 +1,8 @@
 package cz.tyckouni.mvpgate.party.business.usecase.create.idp
 
 import cz.tyckouni.mvpgate.party.business.dao.GuidProvider
-import cz.tyckouni.mvpgate.party.business.dao.idp.SaveIdp
+import cz.tyckouni.mvpgate.party.business.dao.idp.Idps
+import cz.tyckouni.mvpgate.party.business.entity.CommonIdp
 import cz.tyckouni.mvpgate.party.business.entity.Idp
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -13,21 +14,21 @@ import org.mockito.kotlin.argumentCaptor
  */
 internal class CreateIdpInteractorTest {
 
-    private val saveIdp = Mockito.mock(SaveIdp::class.java)
+    private val idps = Mockito.mock(Idps::class.java)
     private val idpArgumentCaptor = argumentCaptor<Idp>()
-    private val expectedIdp = Idp("guid", "cool-idp", "https://login")
-    private val guidProvider = GuidProvider { expectedIdp.guid }
+    private val expectedIdp = CommonIdp("guid", "cool-idp", "https://login")
+    private val guidProvider = GuidProvider { expectedIdp.getGuid() }
 
-    private val createIdpInteractor = CreateIdpInteractor(saveIdp, guidProvider)
+    private val createIdpInteractor = CreateIdpInteractor(idps, guidProvider)
 
     @Test
     fun `create assigns correct fields`() {
         Mockito.doNothing()
-            .`when`(saveIdp)
+            .`when`(idps)
             .save(idpArgumentCaptor.capture())
 
-        val createIdpInput = CreateIdpInput(expectedIdp.name, expectedIdp.loginUrl)
-        createIdpInteractor.create(createIdpInput)
+        val createIdpRequest = CreateIdpRequest(expectedIdp.getName(), expectedIdp.getLoginUrl())
+        createIdpInteractor.create(createIdpRequest)
         val savedIdp = idpArgumentCaptor.firstValue
 
         assertThat(savedIdp)
