@@ -11,5 +11,5 @@ interface ListIdpsUseCase {
      *
      * @return [Page] with list of found [Idp]
      */
-    fun list(pageRequest: PageRequest): Page<Idp>
+    fun list(pageRequest: PageRequest<IdpSort>): Page<Idp>
 }

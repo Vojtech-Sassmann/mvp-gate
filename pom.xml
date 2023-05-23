@@ -16,6 +16,7 @@
     <name>mvp-gate</name>
 
     <modules>
+        <module>party/application</module>
         <module>party/business</module>
 		<module>party/grpc</module>
         <module>user</module>
@@ -56,6 +57,11 @@
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
 				<artifactId>mvp-gate-user-grpc</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.tyckouni</groupId>
+				<artifactId>mvp-gate-party-business</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

@@ -19,7 +19,7 @@ internal class ListIdpsInteractorTest {
 
     private val idps = mock(Idps::class.java)
     private val listIdpsInteractor = ListIdpsInteractor(idps)
-    private val pageRequestCaptor = argumentCaptor<PageRequest>()
+    private val pageRequestCaptor = argumentCaptor<PageRequest<IdpSort>>()
 
     @Test
     fun list() {
@@ -27,8 +27,8 @@ internal class ListIdpsInteractorTest {
             CommonIdp("guid", "name", "https://login"),
             CommonIdp("guid-o", "name-o", "https://login-o"),
         )
-        val expectedPage = Page<Idp>(foundIdps, 0, 1)
-        val pageRequest = PageRequest(0, 1, "guid", Order.ASCENDING)
+        val expectedPage = Page<Idp>(foundIdps, 2)
+        val pageRequest = PageRequest(0, 1, IdpSort.NAME, Order.ASCENDING)
 
         `when`(idps.find(pageRequestCaptor.capture()))
             .thenReturn(expectedPage)
