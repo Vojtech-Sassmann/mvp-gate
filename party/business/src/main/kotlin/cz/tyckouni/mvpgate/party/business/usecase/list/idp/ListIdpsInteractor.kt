@@ -8,7 +8,7 @@ import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
 internal class ListIdpsInteractor(
     private val idps: Idps,
 ) : ListIdpsUseCase {
-    override fun list(pageRequest: PageRequest): Page<Idp> {
+    override fun list(pageRequest: PageRequest<IdpSort>): Page<Idp> {
         return idps.find(pageRequest)
     }
 }

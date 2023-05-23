@@ -1,8 +1,8 @@
 package cz.tyckouni.mvpgate.party.business.usecase.list
 
-class PageRequest(
+class PageRequest<T : Sort>(
     val number: Int,
     val size: Int,
-    val sortField: String,
+    val sortProperty: T,
     val order: Order,
 )
