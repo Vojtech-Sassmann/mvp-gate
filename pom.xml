@@ -16,11 +16,9 @@
     <name>mvp-gate</name>
 
     <modules>
-        <module>party</module>
-		<module>party-grpc</module>
-        <module>party-grpc-client</module>
+        <module>party/business</module>
+		<module>party/grpc</module>
         <module>user</module>
-		<module>user-grpc-client</module>
 		<module>user-grpc</module>
 		<module>grpc</module>
         <module>auth</module>
