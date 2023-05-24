@@ -15,6 +15,10 @@ type Query {
     ): IdpConnection!
 }
 
+type Mutation {
+    createIdp(createIdpInput: CreateIdpInput): Idp!
+}
+
 enum OrderDirection {
     ASC
     DESC
