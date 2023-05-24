@@ -1,0 +1,19 @@
+enum IdpOrderField {
+    NAME
+}
+
+input IdpOrder {
+    direction: OrderDirection!
+    field: IdpOrderField
+}
+
+type Idp {
+    name: String!
+    guid: ID!
+    loginUrl: String!
+}
+
+type IdpConnection {
+    totalCount: Int!
+    nodes: [Idp!]!
+}

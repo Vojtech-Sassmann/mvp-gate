@@ -7,8 +7,10 @@ import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
+import jakarta.annotation.PostConstruct
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component
+import java.util.UUID
 
 @Component
 class JpaIdps(
@@ -27,7 +29,7 @@ class JpaIdps(
 
     override fun find(pageRequest: PageRequest<IdpSort>): Page<Idp> {
         val pageable = org.springframework.data.domain.PageRequest.of(
-            pageRequest.number,
+            pageRequest.page,
             pageRequest.size,
             getSortDirection(pageRequest.order),
             getSortProperty(pageRequest.sortProperty),
@@ -36,7 +38,7 @@ class JpaIdps(
         val jpaPage = repository.findAll(pageable)
             .map { idp -> convertToIdp(idp) }
 
-        return Page(jpaPage.content, jpaPage.size)
+        return Page(jpaPage.content, jpaPage.totalElements)
     }
 
     private fun convertToIdp(idp: IdpJpa): Idp = CommonIdp(idp.guid, idp.name, idp.loginUrl)
@@ -48,5 +50,63 @@ class JpaIdps(
 
     private fun getSortProperty(idpSort: IdpSort): String = when (idpSort) {
         IdpSort.NAME -> "name"
+    }
+
+    @PostConstruct
+    fun init() {
+        repository.saveAll(
+            listOf(
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "facebook",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "google",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "linkedin",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "myid",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "yourid",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "grandpaid",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "motherid",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "orangeid",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "fruitid",
+                    loginUrl = "https://login",
+                ),
+                IdpJpa(
+                    guid = UUID.randomUUID().toString(),
+                    name = "begoid",
+                    loginUrl = "https://login",
+                ),
+            ),
+        )
     }
 }
