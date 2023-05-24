@@ -1,9 +1,9 @@
 package cz.tyckouni.mvpgate.party.business.usecase.create.idp
 
-import cz.tyckouni.mvpgate.party.business.dao.GuidProvider
-import cz.tyckouni.mvpgate.party.business.dao.idp.Idps
 import cz.tyckouni.mvpgate.party.business.entity.CommonIdp
 import cz.tyckouni.mvpgate.party.business.entity.Idp
+import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
+import cz.tyckouni.mvpgate.party.business.gateway.Idps
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
