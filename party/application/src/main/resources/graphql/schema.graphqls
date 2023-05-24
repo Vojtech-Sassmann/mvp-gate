@@ -1,0 +1,21 @@
+type Query {
+    idps(
+        """
+        Number of elements to return.
+        """
+        size: Int!
+        """
+        Page number.
+        """
+        page: Int!
+        """
+        Order of search elements.
+        """
+        orderBy: IdpOrder
+    ): IdpConnection!
+}
+
+enum OrderDirection {
+    ASC
+    DESC
+}
