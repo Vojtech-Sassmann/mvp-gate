@@ -7,6 +7,11 @@ input IdpOrder {
     field: IdpOrderField
 }
 
+input CreateIdpInput {
+    name: String!
+    loginUrl: String!
+}
+
 type Idp {
     name: String!
     id: ID!

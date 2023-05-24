@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller
  * Graphql controller for Idp related queries
  */
 @Controller
-class IdpController(
+class IdpQueryController(
     private val listIdpsUseCase: ListIdpsUseCase,
     private val idpConnectionPresenter: IdpConnectionPresenter,
 ) {
