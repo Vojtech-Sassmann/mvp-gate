@@ -19,6 +19,7 @@ class CreateIdpInteractor(
         Validator()
             .validate(UrlValidator.isValidUrl(createIdpRequest.loginUrl), "loginUrl is not a valid URL")
             .validate(createIdpRequest.name.isNotBlank(), "name cannot be blank")
+            .validate(!idps.existsByName(createIdpRequest.name), "given name is not unique")
             .handle()
 
         val newIdp = CommonIdp(guidProvider.newGuid(), createIdpRequest.name, createIdpRequest.loginUrl)

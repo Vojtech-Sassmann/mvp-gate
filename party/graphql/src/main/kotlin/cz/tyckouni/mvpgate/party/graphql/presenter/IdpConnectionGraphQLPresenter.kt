@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component
  * Presenter that transforms [Page] of [Idp] to [IdpConnection]
  */
 @Component
-class IdpConnectionPresenter(
-    private val idpPresenter: IdpPresenter,
+class IdpConnectionGraphQLPresenter(
+    private val idpGraphQLPresenter: IdpGraphQLPresenter,
 ) {
 
     fun present(idpPage: Page<Idp>): IdpConnection {
         val idps = idpPage.elements
-            .map(idpPresenter::present)
+            .map(idpGraphQLPresenter::present)
 
         return IdpConnection(
             totalCount = idpPage.totalSize,

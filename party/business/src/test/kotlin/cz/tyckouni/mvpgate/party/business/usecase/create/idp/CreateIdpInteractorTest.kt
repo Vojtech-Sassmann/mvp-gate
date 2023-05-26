@@ -9,6 +9,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.kotlin.argumentCaptor
 
 /**
@@ -54,5 +55,18 @@ internal class CreateIdpInteractorTest {
         assertThatExceptionOfType(ValidationException::class.java)
             .isThrownBy { createIdpInteractor.create(createIdpRequest) }
             .withMessageContaining("Validation failed: ['name cannot be blank']")
+    }
+
+    @Test
+    fun `fails for an existing idp with given name`() {
+        val name = "orangeIdp"
+        val createIdpRequest = CreateIdpRequest(name, expectedIdp.getLoginUrl())
+
+        `when`(idps.existsByName(name))
+            .thenReturn(true)
+
+        assertThatExceptionOfType(ValidationException::class.java)
+            .isThrownBy { createIdpInteractor.create(createIdpRequest) }
+            .withMessageContaining("Validation failed: ['given name is not unique']")
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
  * Presenter that transforms [Idp] into [IdpDto]
  */
 @Component
-class IdpPresenter {
+class IdpGraphQLPresenter {
 
     fun present(idp: Idp): IdpDto {
         return IdpDto(

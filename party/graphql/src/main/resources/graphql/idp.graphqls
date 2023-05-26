@@ -1,3 +1,27 @@
+extend type Query {
+    idps(
+        """
+        Number of elements to return.
+        """
+        size: Int!
+        """
+        Page number.
+        """
+        page: Int!
+        """
+        Order of search elements.
+        """
+        orderBy: IdpOrder
+    ): IdpConnection!
+}
+
+extend type Mutation {
+    """
+    Create idp from given input. If the creation fails, null is returned with errors.
+    """
+    createIdp(createIdpInput: CreateIdpInput): Idp
+}
+
 enum IdpOrderField {
     NAME
 }
