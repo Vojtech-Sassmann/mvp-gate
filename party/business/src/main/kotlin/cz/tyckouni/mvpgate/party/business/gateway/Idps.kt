@@ -18,4 +18,11 @@ interface Idps {
      * @return found [Page]
      */
     fun find(pageRequest: PageRequest<IdpSort>): Page<Idp>
+
+    /**
+     * Returns true, if there is an [Idp] with given [name]
+     *
+     * @return true, if there is an [Idp] found, false otherwise
+     */
+    fun existsByName(name: String): Boolean
 }

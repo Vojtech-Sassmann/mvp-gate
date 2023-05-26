@@ -4,7 +4,7 @@ import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.ListIdpsUseCase
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpConnection
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpOrder
-import cz.tyckouni.mvpgate.party.graphql.presenter.IdpConnectionPresenter
+import cz.tyckouni.mvpgate.party.graphql.presenter.IdpConnectionGraphQLPresenter
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller
 @Controller
 class IdpQueryController(
     private val listIdpsUseCase: ListIdpsUseCase,
-    private val idpConnectionPresenter: IdpConnectionPresenter,
+    private val idpConnectionGraphQLPresenter: IdpConnectionGraphQLPresenter,
 ) {
 
     @QueryMapping
@@ -29,6 +29,6 @@ class IdpQueryController(
             ),
         )
 
-        return idpConnectionPresenter.present(idpPage)
+        return idpConnectionGraphQLPresenter.present(idpPage)
     }
 }

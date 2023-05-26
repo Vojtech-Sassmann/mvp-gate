@@ -41,6 +41,10 @@ class JpaIdps(
         return Page(jpaPage.content, jpaPage.totalElements)
     }
 
+    override fun existsByName(name: String): Boolean {
+        return repository.existsByName(name)
+    }
+
     private fun convertToIdp(idp: IdpJpa): Idp = CommonIdp(idp.guid, idp.name, idp.loginUrl)
 
     private fun getSortDirection(order: Order): Sort.Direction = when (order) {
