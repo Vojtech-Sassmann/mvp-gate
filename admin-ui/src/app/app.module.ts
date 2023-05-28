@@ -17,6 +17,8 @@ import {TuiReorderModule, TuiTableModule, TuiTablePaginationModule} from "@taiga
 import {TuiInputModule} from "@taiga-ui/kit";
 import {TuiLetModule} from "@taiga-ui/cdk";
 import {FormsModule} from "@angular/forms";
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {FormsModule} from "@angular/forms";
     TuiButtonModule,
     TuiTextfieldControllerModule,
     TuiLetModule,
-    FormsModule
+    FormsModule,
+    GraphQLModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
