@@ -1,5 +1,5 @@
 export interface Idp {
-  name: string,
-  loginUrl: string,
-  guid: string,
+  readonly name: string,
+  readonly loginUrl: string,
+  readonly id: string,
 }
