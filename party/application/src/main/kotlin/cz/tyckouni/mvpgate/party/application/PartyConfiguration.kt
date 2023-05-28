@@ -13,7 +13,10 @@ import cz.tyckouni.mvpgate.party.graphql.GraphQLConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.util.UUID
+
 
 /**
  * Class with beans configuration for the party application
@@ -45,5 +48,14 @@ class PartyConfiguration {
     @Bean
     fun createIdpUseCase(idps: Idps, guidProvider: GuidProvider): CreateIdpUseCase {
         return CreateIdpInteractor(idps, guidProvider)
+    }
+
+    @Bean
+    fun corsConfigurer(): WebMvcConfigurer = object : WebMvcConfigurer {
+        override fun addCorsMappings(registry: CorsRegistry) {
+            registry
+                .addMapping("/graphql")
+                .allowedOrigins("http://localhost:4200")
+        }
     }
 }

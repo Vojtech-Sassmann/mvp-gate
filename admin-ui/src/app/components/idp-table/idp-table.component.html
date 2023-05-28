@@ -37,7 +37,7 @@
     icon="tuiIconPlus"
     appearance="secondary"
     class="tui-space_left-3"
-    (click)="addNewIdp"
+    (click)="addNewIdp()"
   >
     Add new
   </button>
@@ -117,6 +117,7 @@
     <tr>
       <td [colSpan]="columns.length">
         <tui-table-pagination
+          [size]="5"
           class="tui-space_top-2"
           [total]="(total$ | async) || 0"
           (pageChange)="onPage($event)"

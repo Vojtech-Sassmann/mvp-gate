@@ -1,33 +1,22 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {Idp} from "../../model/Idp";
-import {
-  BehaviorSubject,
-  combineLatest,
-  debounceTime,
-  filter,
-  map,
-  Observable,
-  share,
-  startWith,
-  switchMap,
-  timer
-} from "rxjs";
+import {BehaviorSubject, combineLatest, debounceTime, filter, map, Observable, share, startWith, switchMap} from "rxjs";
 import {TUI_ARROW} from "@taiga-ui/kit";
-import {TUI_DEFAULT_MATCHER, tuiDefaultSort, tuiIsFalsy, tuiIsPresent} from "@taiga-ui/cdk";
-import {TuiComparator} from "@taiga-ui/addon-table";
+import {TUI_DEFAULT_MATCHER, tuiIsFalsy, tuiIsPresent} from "@taiga-ui/cdk";
+import {Idp, IdpConnection, IdpOrderField, IdpsGQL, OrderDirection} from "../../../graphql/generated";
 
 type Key = 'id' | 'name' | 'loginUrl'
+
+const KEY_TO_FIELD = new Map<Key, IdpOrderField>([
+  ['id', IdpOrderField.Name],
+  ['name', IdpOrderField.Name], // TODO
+  ['loginUrl', IdpOrderField.Name] // TODO
+])
 
 const KEYS: Record<string, Key> = {
   Name: 'name',
   Id: 'id',
   'Login URL': 'loginUrl',
 };
-const DATA: readonly Idp[] = Array.from({length: 300}, () => ({
-  name: `fb-${Math.floor(Math.random() * 10)}`,
-  id: 'dfdfdfd',
-  loginUrl: `https://fdfdf-${Math.floor(Math.random() * 10)}.com`,
-}));
 
 @Component({
   selector: 'app-idp-table',
@@ -37,7 +26,7 @@ const DATA: readonly Idp[] = Array.from({length: 300}, () => ({
 })
 export class IdpTableComponent {
 
-  private readonly size$ = new BehaviorSubject(10);
+  private readonly size$ = new BehaviorSubject(5);
   private readonly page$ = new BehaviorSubject(0);
 
   readonly direction$ = new BehaviorSubject<-1 | 1>(-1);
@@ -69,15 +58,19 @@ export class IdpTableComponent {
 
   readonly total$ = this.request$.pipe(
     filter(tuiIsPresent),
-    map(({length}) => length),
-    startWith(1),
+    map(idpConn => {
+      return idpConn!.totalCount;
+    },
+    startWith(1)),
   );
 
   readonly data$: Observable<readonly Idp[]> = this.request$.pipe(
     filter(tuiIsPresent),
-    map(idps => idps.filter(tuiIsPresent)),
+    map(idps => idps.nodes),
     startWith([]),
   );
+
+  constructor(private idpsGQL: IdpsGQL) {}
 
   onEnabled(enabled: readonly string[]): void {
     this.enabled = enabled;
@@ -107,29 +100,25 @@ export class IdpTableComponent {
     direction: -1 | 1,
     page: number,
     size: number,
-  ): Observable<ReadonlyArray<Idp | null>> {
+  ): Observable<IdpConnection> {
     console.info('Making a request');
+    // return timer(1).pipe(map(() => []));
 
-    const start = page * size;
-    const end = start + size;
-    const result = [...DATA]
-      .sort(sortBy(key, direction))
-      .map((user, index) => (index >= start && index < end ? user : null));
-
-    // Imitating server response
-    return timer(3000).pipe(map(() => result));
+    return this.idpsGQL.fetch({
+        page: page,
+        size: size,
+        field: KEY_TO_FIELD.get(key),
+        direction: direction == 1 ? OrderDirection.Asc : OrderDirection.Desc
+      }
+    )
+      .pipe(map(result => result.data.idps))
   }
 
   getLoginUrl(idp: Idp) {
     return idp.loginUrl;
   }
 
-
   addNewIdp() {
 
   }
-}
-
-function sortBy(key: Key, direction: -1 | 1): TuiComparator<Idp> {
-  return (a, b) => direction * tuiDefaultSort(a[key], b[key]);
 }
