@@ -1,22 +1,23 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BehaviorSubject, combineLatest, debounceTime, filter, map, Observable, share, startWith, switchMap} from "rxjs";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BehaviorSubject, combineLatest, debounceTime, map, share} from "rxjs";
 import {TUI_ARROW} from "@taiga-ui/kit";
-import {TUI_DEFAULT_MATCHER, tuiIsFalsy, tuiIsPresent} from "@taiga-ui/cdk";
-import {Idp, IdpConnection, IdpOrderField, IdpsGQL, OrderDirection} from "../../../graphql/generated";
+import {TUI_DEFAULT_MATCHER} from "@taiga-ui/cdk";
+import {Idp, IdpConnection} from "../../../graphql/generated";
 
-type Key = 'id' | 'name' | 'loginUrl'
+export type IdpKey = 'id' | 'name' | 'loginUrl'
 
-const KEY_TO_FIELD = new Map<Key, IdpOrderField>([
-  ['id', IdpOrderField.Name],
-  ['name', IdpOrderField.Name], // TODO
-  ['loginUrl', IdpOrderField.Name] // TODO
-])
-
-const KEYS: Record<string, Key> = {
+const KEYS: Record<string, IdpKey> = {
   Name: 'name',
   Id: 'id',
   'Login URL': 'loginUrl',
 };
+
+export interface IdpTableChange {
+  key: IdpKey;
+  direction: -1 | 1;
+  page: number;
+  size: number;
+}
 
 @Component({
   selector: 'app-idp-table',
@@ -24,17 +25,25 @@ const KEYS: Record<string, Key> = {
   styleUrls: ['./idp-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdpTableComponent {
+export class IdpTableComponent implements OnInit {
 
   private readonly size$ = new BehaviorSubject(5);
   private readonly page$ = new BehaviorSubject(0);
 
   readonly direction$ = new BehaviorSubject<-1 | 1>(-1);
-  readonly sorter$ = new BehaviorSubject<Key>('name');
+  readonly sorter$ = new BehaviorSubject<IdpKey>('name');
 
   search = '';
 
-  readonly request$ = combineLatest([
+  @Input()
+  loading = true;
+
+  @Input()
+  idpConnection?: IdpConnection;
+
+  @Output()
+  page = new EventEmitter<IdpTableChange>();
+  pageSubject$ = combineLatest([
     this.sorter$,
     this.direction$,
     this.page$,
@@ -42,9 +51,13 @@ export class IdpTableComponent {
   ]).pipe(
     // zero time debounce for a case when both key and direction change
     debounceTime(0),
-    switchMap(query => this.getData(...query).pipe(startWith(null))),
+    map(query => this.foo(...query)),
     share(),
-  );
+  )
+
+  ngOnInit(): void {
+    this.pageSubject$.subscribe(idpTableChange => this.page.emit(idpTableChange));
+  }
 
   initial: readonly string[] = ['Name', 'Id', 'Login URL'];
 
@@ -53,24 +66,6 @@ export class IdpTableComponent {
   columns = ["name", "id", "loginUrl"];
 
   readonly arrow = TUI_ARROW;
-
-  readonly loading$ = this.request$.pipe(map(tuiIsFalsy));
-
-  readonly total$ = this.request$.pipe(
-    filter(tuiIsPresent),
-    map(idpConn => {
-      return idpConn!.totalCount;
-    },
-    startWith(1)),
-  );
-
-  readonly data$: Observable<readonly Idp[]> = this.request$.pipe(
-    filter(tuiIsPresent),
-    map(idps => idps.nodes),
-    startWith([]),
-  );
-
-  constructor(private idpsGQL: IdpsGQL) {}
 
   onEnabled(enabled: readonly string[]): void {
     this.enabled = enabled;
@@ -95,23 +90,18 @@ export class IdpTableComponent {
     return !!this.search && TUI_DEFAULT_MATCHER(value, this.search);
   }
 
-  private getData(
-    key: Key,
+  private foo(
+    key: IdpKey,
     direction: -1 | 1,
     page: number,
     size: number,
-  ): Observable<IdpConnection> {
-    console.info('Making a request');
-    // return timer(1).pipe(map(() => []));
-
-    return this.idpsGQL.fetch({
-        page: page,
-        size: size,
-        field: KEY_TO_FIELD.get(key),
-        direction: direction == 1 ? OrderDirection.Asc : OrderDirection.Desc
-      }
-    )
-      .pipe(map(result => result.data.idps))
+  ): IdpTableChange {
+    return {
+      key: key,
+      direction: direction,
+      page: page,
+      size: size
+    }
   }
 
   getLoginUrl(idp: Idp) {
