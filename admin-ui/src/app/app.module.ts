@@ -19,11 +19,13 @@ import {TuiLetModule} from "@taiga-ui/cdk";
 import {FormsModule} from "@angular/forms";
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { IdpsPageComponent } from './pages/idps/idps-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IdpTableComponent
+    IdpTableComponent,
+    IdpsPageComponent
   ],
   imports: [
     BrowserModule,
