@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BehaviorSubject, combineLatest, debounceTime, map, share} from "rxjs";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {combineLatest, debounceTime, map, Observable, share, Subject, Subscription} from "rxjs";
 import {TUI_ARROW} from "@taiga-ui/kit";
 import {TUI_DEFAULT_MATCHER} from "@taiga-ui/cdk";
 import {Idp, IdpConnection} from "../../../graphql/generated";
@@ -10,62 +10,65 @@ const KEYS: Record<string, IdpKey> = {
   Name: 'name',
   Id: 'id',
   'Login URL': 'loginUrl',
-};
-
-export interface IdpTableChange {
+}
+export interface IdpOrderChange {
   key: IdpKey;
   direction: -1 | 1;
-  page: number;
-  size: number;
 }
-
 @Component({
   selector: 'app-idp-table',
   templateUrl: './idp-table.component.html',
   styleUrls: ['./idp-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IdpTableComponent implements OnInit {
-
-  private readonly size$ = new BehaviorSubject(5);
-  private readonly page$ = new BehaviorSubject(0);
-
-  readonly direction$ = new BehaviorSubject<-1 | 1>(-1);
-  readonly sorter$ = new BehaviorSubject<IdpKey>('name');
-
-  search = '';
+export class IdpTableComponent implements OnInit, OnDestroy {
 
   @Input()
   loading = true;
-
   @Input()
-  idpConnection?: IdpConnection;
+  idpConnectionObservable?: Observable<IdpConnection>;
+  @Input()
+  page = 0;
+  @Input()
+  size = 5;
+  @Input()
+  sortBy: IdpKey = 'name';
+  @Input()
+  direction: -1 | 1 = 1;
 
   @Output()
-  page = new EventEmitter<IdpTableChange>();
-  pageSubject$ = combineLatest([
-    this.sorter$,
-    this.direction$,
-    this.page$,
-    this.size$,
-  ]).pipe(
-    // zero time debounce for a case when both key and direction change
-    debounceTime(0),
-    map(query => this.foo(...query)),
-    share(),
-  )
-
-  ngOnInit(): void {
-    this.pageSubject$.subscribe(idpTableChange => this.page.emit(idpTableChange));
-  }
-
-  initial: readonly string[] = ['Name', 'Id', 'Login URL'];
-
-  enabled = this.initial;
-
-  columns = ["name", "id", "loginUrl"];
+  pageChange = new EventEmitter<number>();
+  @Output()
+  add = new EventEmitter();
+  @Output()
+  orderChange = new EventEmitter<IdpOrderChange>();
 
   readonly arrow = TUI_ARROW;
+  readonly direction$ = new Subject<-1 | 1>();
+  readonly sorter$ = new Subject<IdpKey>();
+
+  initial: readonly string[] = ['Name', 'Id', 'Login URL'];
+  enabled = this.initial;
+  columns = ["name", "id", "loginUrl"];
+  search = '';
+
+  subscription?: Subscription;
+
+  ngOnInit(): void {
+    this.subscription = combineLatest([
+      this.sorter$,
+      this.direction$,
+    ]).pipe(
+      // zero time debounce for a case when both key and direction change
+      debounceTime(0),
+      map(query => this.createIdpOrderChange(...query)),
+      share(),
+    ).subscribe(change => this.orderChange.emit(change))
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe()
+  }
 
   onEnabled(enabled: readonly string[]): void {
     this.enabled = enabled;
@@ -74,33 +77,21 @@ export class IdpTableComponent implements OnInit {
       .map(column => KEYS[column]);
   }
 
-  onDirection(direction: -1 | 1): void {
-    this.direction$.next(direction);
-  }
-
-  onSize(size: number): void {
-    this.size$.next(size);
-  }
-
   onPage(page: number): void {
-    this.page$.next(page);
+    this.pageChange.emit(page)
   }
 
   isMatch(value: unknown): boolean {
     return !!this.search && TUI_DEFAULT_MATCHER(value, this.search);
   }
 
-  private foo(
+  private createIdpOrderChange(
     key: IdpKey,
     direction: -1 | 1,
-    page: number,
-    size: number,
-  ): IdpTableChange {
+  ): IdpOrderChange {
     return {
       key: key,
       direction: direction,
-      page: page,
-      size: size
     }
   }
 
@@ -109,6 +100,6 @@ export class IdpTableComponent implements OnInit {
   }
 
   addNewIdp() {
-
+    this.add.emit();
   }
 }

@@ -1,6 +1,12 @@
 <app-idp-table
-  [idpConnection]="idpConnection"
+  [idpConnectionObservable]="idpConnectionObservable"
   [loading]="idpLoading"
-  (page)="pageChanged($event)"
+  (pageChange)="pageChanged($event)"
+  (orderChange)="orderChanged($event)"
+  [direction]="direction"
+  [sortBy]="sortBy"
+  [page]="initPage"
+  [size]="initSize"
+  (add)="createIdp()"
 >
 </app-idp-table>
