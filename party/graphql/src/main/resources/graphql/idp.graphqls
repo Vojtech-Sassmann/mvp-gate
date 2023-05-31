@@ -19,7 +19,7 @@ extend type Mutation {
     """
     Create idp from given input. If the creation fails, null is returned with errors.
     """
-    createIdp(createIdpInput: CreateIdpInput): Idp
+    createIdp(createIdpInput: CreateIdpInput!): Idp
 }
 
 enum IdpOrderField {

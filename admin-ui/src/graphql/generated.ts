@@ -52,7 +52,7 @@ export type Mutation = {
 
 
 export type MutationCreateIdpArgs = {
-  createIdpInput?: InputMaybe<CreateIdpInput>;
+  createIdpInput: CreateIdpInput;
 };
 
 export enum OrderDirection {
@@ -82,6 +82,13 @@ export type IdpsQueryVariables = Exact<{
 
 export type IdpsQuery = { __typename?: 'Query', idps: { __typename?: 'IdpConnection', totalCount: number, nodes: Array<{ __typename?: 'Idp', id: string, name: string, loginUrl: string }> } };
 
+export type CreateIdpMutationVariables = Exact<{
+  input: CreateIdpInput;
+}>;
+
+
+export type CreateIdpMutation = { __typename?: 'Mutation', createIdp?: { __typename?: 'Idp', id: string, name: string, loginUrl: string } | null };
+
 export const IdpsDocument = gql`
     query Idps($page: Int!, $size: Int!, $field: IdpOrderField, $direction: OrderDirection!) {
   idps(page: $page, size: $size, orderBy: {field: $field, direction: $direction}) {
@@ -100,6 +107,26 @@ export const IdpsDocument = gql`
   })
   export class IdpsGQL extends Apollo.Query<IdpsQuery, IdpsQueryVariables> {
     override document = IdpsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateIdpDocument = gql`
+    mutation CreateIdp($input: CreateIdpInput!) {
+  createIdp(createIdpInput: $input) {
+    id
+    name
+    loginUrl
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateIdpGQL extends Apollo.Mutation<CreateIdpMutation, CreateIdpMutationVariables> {
+    override document = CreateIdpDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
