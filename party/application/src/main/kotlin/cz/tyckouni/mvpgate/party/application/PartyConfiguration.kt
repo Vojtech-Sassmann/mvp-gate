@@ -17,7 +17,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.util.UUID
 
-
 /**
  * Class with beans configuration for the party application
  */
