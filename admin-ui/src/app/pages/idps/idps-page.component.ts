@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {
   CreateIdpGQL,
   IdpConnection,
@@ -8,10 +8,13 @@ import {
   IdpsQueryVariables,
   OrderDirection
 } from "../../../graphql/generated";
-import {IdpKey, IdpOrderChange} from "../../components/idp-table/idp-table.component";
+import {IdpKey, IdpOrderChange} from "../../components/tables/idp-table/idp-table.component";
 import {QueryRef} from "apollo-angular";
 import {map, Observable} from "rxjs";
 import {ApolloQueryResult} from "@apollo/client";
+import {TuiDialogService} from "@taiga-ui/core";
+import {CreateIdpDialogComponent} from "../../components/dialogs/create-idp-dialog/create-idp-dialog.component";
+import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
 
 const KEY_TO_FIELD = new Map<IdpKey, IdpOrderField>([
   ['id', IdpOrderField.Name],
@@ -28,6 +31,8 @@ export class IdpsPageComponent implements OnInit {
   constructor(
     private idpsGQL: IdpsGQL,
     private createIdpGQL: CreateIdpGQL,
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector,
   ) {
   }
 
@@ -67,6 +72,14 @@ export class IdpsPageComponent implements OnInit {
   }
 
   createIdp() {
+    this.dialogs.open(
+      new PolymorpheusComponent(CreateIdpDialogComponent, this.injector),
+      {
+        size: 'page',
+        closeable: true,
+        dismissible: true,
+      },
+    ).subscribe();
     this.createIdpGQL.mutate({
       input: {
         name: 'name' + new Date().getSeconds(),

@@ -1,0 +1,58 @@
+<div class="tui-container tui-space_top-5">
+  <form [formGroup]="form">
+    <div class="tui-row tui-row_sme">
+      <div class="tui-col_12">
+        <h3 class="tui-form__header tui-form__header_margin-top_none">Create Identity provider</h3>
+        <div class="tui-form__row">
+          <tui-input
+            formControlName="nameValue"
+          >
+            Name
+            <input
+              tuiTextfield
+            />
+            <span class="tui-required"></span>
+          </tui-input>
+          <tui-error
+            formControlName="nameValue"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+        <div class="tui-form__row">
+          <tui-input
+            formControlName="loginUrlValue"
+          >
+            Login URL
+            <input
+              tuiTextfield
+            />
+            <span class="tui-required"></span>
+          </tui-input>
+          <tui-error
+            formControlName="loginUrlValue"
+            [error]="[] | tuiFieldError | async"
+          ></tui-error>
+        </div>
+        <div class="tui-form__buttons">
+          <button
+            tuiButton
+            size="l"
+            type="submit"
+            class="tui-form__button"
+          >
+            Create
+          </button>
+          <button
+            tuiButton
+            type="button"
+            appearance="flat"
+            size="l"
+            class="tui-form__button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

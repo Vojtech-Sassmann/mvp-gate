@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnIn
 import {combineLatest, debounceTime, map, Observable, share, Subject, Subscription} from "rxjs";
 import {TUI_ARROW} from "@taiga-ui/kit";
 import {TUI_DEFAULT_MATCHER} from "@taiga-ui/cdk";
-import {Idp, IdpConnection} from "../../../graphql/generated";
+import {Idp, IdpConnection} from "../../../../graphql/generated";
 
 export type IdpKey = 'id' | 'name' | 'loginUrl'
 
