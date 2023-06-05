@@ -12,7 +12,7 @@ import {IdpKey, IdpOrderChange} from "../../components/tables/idp-table/idp-tabl
 import {QueryRef} from "apollo-angular";
 import {map, Observable} from "rxjs";
 import {ApolloQueryResult} from "@apollo/client";
-import {TuiDialogService} from "@taiga-ui/core";
+import {TuiAlertService, TuiDialogService, TuiNotification} from "@taiga-ui/core";
 import {CreateIdpDialogComponent} from "../../components/dialogs/create-idp-dialog/create-idp-dialog.component";
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
 
@@ -33,6 +33,7 @@ export class IdpsPageComponent implements OnInit {
     private createIdpGQL: CreateIdpGQL,
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     @Inject(Injector) private readonly injector: Injector,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
   ) {
   }
 
@@ -58,12 +59,16 @@ export class IdpsPageComponent implements OnInit {
     })
 
     this.queryRef.valueChanges
-      .subscribe(result => this.idpLoading = result.loading);
+      .subscribe(result => {
+        this.idpLoading = result.loading
+        console.log("Loading change: " + this.idpLoading)
+      });
     this.idpConnectionObservable = this.queryRef.valueChanges
       .pipe(map((result: ApolloQueryResult<IdpsQuery>) => result.data.idps));
   }
 
   pageChanged(newPage: number) {
+    this.idpLoading = true;
     this.queryRef?.fetchMore({
       variables: {
         page: newPage
@@ -72,26 +77,26 @@ export class IdpsPageComponent implements OnInit {
   }
 
   createIdp() {
-    this.dialogs.open(
+    this.dialogs.open<boolean>(
       new PolymorpheusComponent(CreateIdpDialogComponent, this.injector),
       {
         size: 'page',
         closeable: true,
         dismissible: true,
       },
-    ).subscribe();
-    this.createIdpGQL.mutate({
-      input: {
-        name: 'name' + new Date().getSeconds(),
-        loginUrl: 'https://localhost'
+    ).subscribe(created => {
+      if (created) {
+        this.alerts
+          .open('Idp was successfully created', {
+            label: 'Idp created',
+            status: TuiNotification.Success
+          })
+          .subscribe();
       }
-    }).subscribe(() => {
-      this.queryRef?.refetch();
-    })
+    });
   }
 
   orderChanged(change: IdpOrderChange) {
-    console.log("order change")
     this.direction = change.direction;
     this.sortBy = change.key;
     this.queryRef?.fetchMore({

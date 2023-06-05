@@ -39,6 +39,8 @@
             size="l"
             type="submit"
             class="tui-form__button"
+            (click)="createIdp()"
+            [showLoader]="!!(createProcessing$ | async)"
           >
             Create
           </button>
@@ -48,6 +50,7 @@
             appearance="flat"
             size="l"
             class="tui-form__button"
+            (click)="close()"
           >
             Cancel
           </button>
