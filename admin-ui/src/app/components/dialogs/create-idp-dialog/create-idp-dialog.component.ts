@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component, Inject, Self} from '@angular/core';
 import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
-import {TuiDialogContext} from "@taiga-ui/core";
+import {TuiAlertService, TuiDialogContext, TuiNotification} from "@taiga-ui/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BehaviorSubject, takeUntil} from "rxjs";
 import {CreateIdpGQL} from "../../../../graphql/generated";
 import {TuiDestroyService} from "@taiga-ui/cdk";
+import {ApolloError} from "@apollo/client";
 
 @Component({
   selector: 'app-create-idp-dialog',
@@ -20,6 +21,7 @@ export class CreateIdpDialogComponent {
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<boolean>,
     @Self() @Inject(TuiDestroyService) private readonly destroy$: TuiDestroyService,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     private readonly createIdpGQL: CreateIdpGQL
   ) {
   }
@@ -45,8 +47,12 @@ export class CreateIdpDialogComponent {
         next: result => {
           this.context.completeWith(true);
         },
-        error: error => {
-          console.error(error)
+        error: (error: ApolloError) => {
+          this.alerts.open(error.message, {
+            label: 'Creation failed',
+            status: TuiNotification.Error,
+          })
+            .subscribe();
           this.createProcessing$.next(false)
         },
         complete: () => {

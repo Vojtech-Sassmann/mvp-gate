@@ -33,7 +33,7 @@ export class IdpsPageComponent implements OnInit {
     private createIdpGQL: CreateIdpGQL,
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     @Inject(Injector) private readonly injector: Injector,
-    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
   ) {
   }
 
@@ -89,7 +89,7 @@ export class IdpsPageComponent implements OnInit {
         this.alerts
           .open('Idp was successfully created', {
             label: 'Idp created',
-            status: TuiNotification.Success
+            status: TuiNotification.Success,
           })
           .subscribe();
       }
