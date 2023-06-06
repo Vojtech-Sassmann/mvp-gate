@@ -7,9 +7,18 @@ package cz.tyckouni.mvpgate.entity
  */
 interface Idp {
 
+    /**
+     * Get global unique identifier of the Idp
+     */
     fun getGuid(): String
 
+    /**
+     * Get unique name of the Idp
+     */
     fun getName(): String
 
+    /**
+     * URL used for login redirection
+     */
     fun getLoginUrl(): String
 }
