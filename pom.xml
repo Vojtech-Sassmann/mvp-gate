@@ -16,16 +16,14 @@
     <name>mvp-gate</name>
 
     <modules>
-        <module>party/application</module>
-        <module>party/business</module>
-		<module>party/database</module>
-		<module>party/graphql</module>
-		<module>party/grpc</module>
-        <module>user</module>
-		<module>user-grpc</module>
-		<module>grpc</module>
-        <module>auth</module>
-		<module>telemetry</module>
+        <module>components/party/application</module>
+		<module>components/party/database</module>
+		<module>components/party/graphql</module>
+		<module>components/party/grpc</module>
+		<module>components/common/grpc</module>
+		<module>components/common/telemetry</module>
+		<module>entity</module>
+		<module>admin-business</module>
 	</modules>
     <properties>
 	    
@@ -53,17 +51,12 @@
 			<!-- start of mvp-gate dependencies -->
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-user-grpc-client</artifactId>
+				<artifactId>mvp-gate-entity</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-user-grpc</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-party-business</artifactId>
+				<artifactId>mvp-gate-admin-business</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
