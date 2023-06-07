@@ -1,4 +1,5 @@
 <app-idp-table
+  *ngIf="idpConnectionObservable"
   [idpConnectionObservable]="idpConnectionObservable"
   [loading]="idpLoading"
   (pageChange)="pageChanged($event)"

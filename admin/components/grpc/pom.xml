@@ -10,7 +10,7 @@
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>mvp-gate-party-grpc</artifactId>
+    <artifactId>mvp-gate-admin-grpc</artifactId>
 
     <dependencies>
         <dependency>

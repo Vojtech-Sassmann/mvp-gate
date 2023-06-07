@@ -10,7 +10,7 @@
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>mvp-gate-party-database</artifactId>
+    <artifactId>mvp-gate-admin-database</artifactId>
 
     <dependencies>
         <dependency>

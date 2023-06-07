@@ -16,14 +16,14 @@
     <name>mvp-gate</name>
 
     <modules>
-        <module>components/party/application</module>
-		<module>components/party/database</module>
-		<module>components/party/graphql</module>
-		<module>components/party/grpc</module>
-		<module>components/common/grpc</module>
-		<module>components/common/telemetry</module>
+		<module>admin/business</module>
+		<module>admin/components/database</module>
+		<module>admin/components/graphql</module>
+		<module>admin/components/grpc</module>
+		<module>admin/components/main</module>
+		<module>common/grpc</module>
+		<module>common/telemetry</module>
 		<module>entity</module>
-		<module>admin-business</module>
 	</modules>
     <properties>
 	    
@@ -61,22 +61,17 @@
 			</dependency>
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-party-database</artifactId>
+				<artifactId>mvp-gate-admin-database</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-party-grapqhql</artifactId>
+				<artifactId>mvp-gate-admin-grapqhql</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-party-grpc</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>cz.tyckouni</groupId>
-				<artifactId>mvp-gate-party-grpc-client</artifactId>
+				<artifactId>mvp-gate-admin-grpc</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
