@@ -3,7 +3,6 @@ package cz.tyckouni.mvpgate.party.business.usecase.create
 import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
 
-
 fun interface CreateSepUseCase {
 
     /**

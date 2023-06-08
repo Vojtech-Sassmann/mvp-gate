@@ -10,7 +10,7 @@ import cz.tyckouni.mvpgate.party.business.usecase.validation.Validator
 class CreateSepInteractor(
     private val seps: Seps,
     private val guidProvider: GuidProvider,
-): CreateSepUseCase {
+) : CreateSepUseCase {
     override fun create(createSepRequest: CreateSepRequest): Sep {
         val validator = Validator()
             .validate(createSepRequest.name.isNotBlank(), "name cannot be blank")
@@ -20,7 +20,7 @@ class CreateSepInteractor(
         createSepRequest.redirectUrls.forEach { redirectUrl ->
             validator.validate(
                 UrlValidator.isValidUrl(redirectUrl),
-                "invalid redirect URL: '$redirectUrl'"
+                "invalid redirect URL: '$redirectUrl'",
             )
         }
 
