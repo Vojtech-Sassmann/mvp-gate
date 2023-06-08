@@ -20,7 +20,7 @@ class CreateIdpInteractor(
             .validate(UrlValidator.isValidUrl(createIdpRequest.loginUrl),
                 "invalid login URL: '${createIdpRequest.loginUrl}'")
             .validate(createIdpRequest.name.isNotBlank(), "name cannot be blank")
-            .validate(!idps.existsByName(createIdpRequest.name), "given name is not unique")
+            .validate(!idps.existsByName(createIdpRequest.name), "given name is not unique: '${createIdpRequest.name}'")
             .handle()
 
         val newIdp = IdpFactory.create(guidProvider.newGuid(), createIdpRequest.name, createIdpRequest.loginUrl)

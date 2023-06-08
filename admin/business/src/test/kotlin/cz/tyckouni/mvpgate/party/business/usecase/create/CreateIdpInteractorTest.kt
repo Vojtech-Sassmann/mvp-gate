@@ -45,7 +45,7 @@ internal class CreateIdpInteractorTest {
 
         assertThatExceptionOfType(ValidationException::class.java)
             .isThrownBy { createIdpInteractor.create(createIdpRequest) }
-            .withMessageContaining("Validation failed: ['invalid login URL: 'http://localhost:900'']")
+            .withMessageContaining("Validation failed: ['invalid login URL: 'http://localhost:900 '']")
     }
 
     @Test
@@ -67,6 +67,6 @@ internal class CreateIdpInteractorTest {
 
         assertThatExceptionOfType(ValidationException::class.java)
             .isThrownBy { createIdpInteractor.create(createIdpRequest) }
-            .withMessageContaining("Validation failed: ['given name is not unique']")
+            .withMessageContaining("Validation failed: ['given name is not unique: 'orangeIdp'']")
     }
 }
