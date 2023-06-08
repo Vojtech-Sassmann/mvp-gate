@@ -1,0 +1,17 @@
+extend type Mutation {
+    """
+    Create sep from given input. If the creation fails, null is returned with errors.
+    """
+    createSep(createSepInput: CreateSepInput!): Sep
+}
+
+type Sep {
+    guid: String!
+    name: String!
+    redirectUrls: [String!]!
+}
+
+input CreateSepInput {
+    name: String!
+    redirectUrls: [String!]!
+}
