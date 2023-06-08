@@ -10,11 +10,9 @@ import org.springframework.stereotype.Component
 @Component
 class IdpGraphQLPresenter {
 
-    fun present(idp: Idp): IdpDto {
-        return IdpDto(
-            name = idp.getName(),
-            id = idp.getGuid(),
-            loginUrl = idp.getLoginUrl(),
-        )
-    }
+    fun present(idp: Idp): IdpDto = IdpDto(
+        name = idp.getName(),
+        id = idp.getGuid(),
+        loginUrl = idp.getLoginUrl(),
+    )
 }

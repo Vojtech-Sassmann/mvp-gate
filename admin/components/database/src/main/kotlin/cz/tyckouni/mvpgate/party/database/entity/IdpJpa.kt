@@ -26,9 +26,7 @@ class IdpJpa(
         if (this === other) return true
         if (other !is IdpJpa) return false
 
-        if (guid != other.guid) return false
-
-        return true
+        return guid == other.guid
     }
 
     override fun hashCode(): Int {

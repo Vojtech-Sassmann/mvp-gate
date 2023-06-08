@@ -31,12 +31,12 @@
         </dependency>
         <dependency>
             <groupId>cz.tyckouni</groupId>
-            <artifactId>mvp-gate-party-database</artifactId>
+            <artifactId>mvp-gate-admin-database</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>cz.tyckouni</groupId>
-            <artifactId>mvp-gate-party-graphql</artifactId>
+            <artifactId>mvp-gate-admin-graphql</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
