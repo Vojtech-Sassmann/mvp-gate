@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.database
 
-import cz.tyckouni.mvpgate.entity.CommonIdp
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.Idps
 import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
@@ -45,7 +45,7 @@ class JpaIdps(
         return repository.existsByName(name)
     }
 
-    private fun convertToIdp(idp: IdpJpa): Idp = CommonIdp(idp.guid, idp.name, idp.loginUrl)
+    private fun convertToIdp(idp: IdpJpa): Idp = IdpFactory.create(idp.guid, idp.name, idp.loginUrl)
 
     private fun getSortDirection(order: Order): Sort.Direction = when (order) {
         Order.ASCENDING -> Sort.Direction.ASC

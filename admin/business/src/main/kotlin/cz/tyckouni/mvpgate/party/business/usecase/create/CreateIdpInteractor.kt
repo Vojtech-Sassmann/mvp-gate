@@ -17,8 +17,10 @@ class CreateIdpInteractor(
 
     override fun create(createIdpRequest: CreateIdpRequest): Idp {
         Validator()
-            .validate(UrlValidator.isValidUrl(createIdpRequest.loginUrl),
-                "invalid login URL: '${createIdpRequest.loginUrl}'")
+            .validate(
+                UrlValidator.isValidUrl(createIdpRequest.loginUrl),
+                "invalid login URL: '${createIdpRequest.loginUrl}'",
+            )
             .validate(createIdpRequest.name.isNotBlank(), "name cannot be blank")
             .validate(!idps.existsByName(createIdpRequest.name), "given name is not unique: '${createIdpRequest.name}'")
             .handle()
