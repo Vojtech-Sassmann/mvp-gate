@@ -7,8 +7,8 @@ import org.springframework.boot.runApplication
  * Party application runner
  */
 @SpringBootApplication
-class PartyApplication
+class AdminApplication
 
 fun main(args: Array<String>) {
-    runApplication<PartyApplication>(*args)
+    runApplication<AdminApplication>(*args)
 }
