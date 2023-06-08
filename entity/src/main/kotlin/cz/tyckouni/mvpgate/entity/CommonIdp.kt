@@ -1,6 +1,9 @@
 package cz.tyckouni.mvpgate.entity
 
-class CommonIdp(
+/**
+ * Common implementation of [Idp]
+ */
+internal class CommonIdp(
     private val guid: String,
     private val name: String,
     private val loginUrl: String,

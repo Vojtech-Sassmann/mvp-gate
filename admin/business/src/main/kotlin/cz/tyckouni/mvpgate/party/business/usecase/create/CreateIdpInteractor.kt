@@ -1,7 +1,7 @@
-package cz.tyckouni.mvpgate.party.business.usecase.create.idp
+package cz.tyckouni.mvpgate.party.business.usecase.create
 
-import cz.tyckouni.mvpgate.entity.CommonIdp
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
 import cz.tyckouni.mvpgate.party.business.gateway.Idps
 import cz.tyckouni.mvpgate.party.business.usecase.validation.UrlValidator
@@ -17,12 +17,13 @@ class CreateIdpInteractor(
 
     override fun create(createIdpRequest: CreateIdpRequest): Idp {
         Validator()
-            .validate(UrlValidator.isValidUrl(createIdpRequest.loginUrl), "loginUrl is not a valid URL")
+            .validate(UrlValidator.isValidUrl(createIdpRequest.loginUrl),
+                "invalid login URL: '${createIdpRequest.loginUrl}'")
             .validate(createIdpRequest.name.isNotBlank(), "name cannot be blank")
             .validate(!idps.existsByName(createIdpRequest.name), "given name is not unique")
             .handle()
 
-        val newIdp = CommonIdp(guidProvider.newGuid(), createIdpRequest.name, createIdpRequest.loginUrl)
+        val newIdp = IdpFactory.create(guidProvider.newGuid(), createIdpRequest.name, createIdpRequest.loginUrl)
 
         idps.save(newIdp)
 

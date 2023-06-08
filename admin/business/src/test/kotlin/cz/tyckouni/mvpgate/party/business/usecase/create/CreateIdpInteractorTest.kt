@@ -1,7 +1,7 @@
-package cz.tyckouni.mvpgate.party.business.usecase.create.idp
+package cz.tyckouni.mvpgate.party.business.usecase.create
 
-import cz.tyckouni.mvpgate.entity.CommonIdp
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
 import cz.tyckouni.mvpgate.party.business.gateway.Idps
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
@@ -19,7 +19,7 @@ internal class CreateIdpInteractorTest {
 
     private val idps = Mockito.mock(Idps::class.java)
     private val idpArgumentCaptor = argumentCaptor<Idp>()
-    private val expectedIdp = CommonIdp("guid", "cool-idp", "http://localhost:8000")
+    private val expectedIdp = IdpFactory.create("guid", "cool-idp", "http://localhost:8000")
     private val guidProvider = GuidProvider { expectedIdp.getGuid() }
 
     private val createIdpInteractor = CreateIdpInteractor(idps, guidProvider)
@@ -45,7 +45,7 @@ internal class CreateIdpInteractorTest {
 
         assertThatExceptionOfType(ValidationException::class.java)
             .isThrownBy { createIdpInteractor.create(createIdpRequest) }
-            .withMessageContaining("Validation failed: ['loginUrl is not a valid URL']")
+            .withMessageContaining("Validation failed: ['invalid login URL: 'http://localhost:900'']")
     }
 
     @Test
