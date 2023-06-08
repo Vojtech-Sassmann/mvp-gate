@@ -2,8 +2,8 @@ package cz.tyckouni.mvpgate.party.application
 
 import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
 import cz.tyckouni.mvpgate.party.business.gateway.Idps
-import cz.tyckouni.mvpgate.party.business.usecase.create.idp.CreateIdpInteractor
-import cz.tyckouni.mvpgate.party.business.usecase.create.idp.CreateIdpUseCase
+import cz.tyckouni.mvpgate.party.business.usecase.create.CreateIdpInteractor
+import cz.tyckouni.mvpgate.party.business.usecase.create.CreateIdpUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.ListIdpsInteractor
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.ListIdpsUseCase
 import cz.tyckouni.mvpgate.party.database.DatabaseConfiguration

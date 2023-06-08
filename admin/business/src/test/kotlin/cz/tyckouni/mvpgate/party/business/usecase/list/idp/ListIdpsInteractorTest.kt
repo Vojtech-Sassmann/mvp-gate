@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.business.usecase.list.idp
 
-import cz.tyckouni.mvpgate.entity.CommonIdp
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.Idps
 import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
@@ -24,8 +24,8 @@ internal class ListIdpsInteractorTest {
     @Test
     fun list() {
         val foundIdps = listOf(
-            CommonIdp("guid", "name", "https://login"),
-            CommonIdp("guid-o", "name-o", "https://login-o"),
+            IdpFactory.create("guid", "name", "https://login"),
+            IdpFactory.create("guid-o", "name-o", "https://login-o"),
         )
         val expectedPage = Page<Idp>(foundIdps, 2)
         val pageRequest = PageRequest(0, 1, IdpSort.NAME, Order.ASCENDING)
