@@ -1,7 +1,9 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
+import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.idp.ListIdpsUseCase
+import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpConnection
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpOrder
 import cz.tyckouni.mvpgate.party.graphql.presenter.IdpConnectionGraphQLPresenter
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Controller
  */
 @Controller
 class IdpQueryController(
-    private val listIdpsUseCase: ListIdpsUseCase,
+    private val listIdpsUseCase: ListUseCase<Idp, IdpSort>,
     private val idpConnectionGraphQLPresenter: IdpConnectionGraphQLPresenter,
 ) {
 
