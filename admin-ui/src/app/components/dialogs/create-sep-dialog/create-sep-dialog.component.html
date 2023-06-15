@@ -2,7 +2,7 @@
   <form [formGroup]="form">
     <div class="tui-row tui-row_sme">
       <div class="tui-col_12">
-        <h3 class="tui-form__header tui-form__header_margin-top_none">Create Identity provider</h3>
+        <h3 class="tui-form__header tui-form__header_margin-top_none">Create Service provider</h3>
         <div class="tui-form__row">
           <tui-input
             formControlName="nameValue"
@@ -18,29 +18,13 @@
             [error]="[] | tuiFieldError | async"
           ></tui-error>
         </div>
-        <div class="tui-form__row">
-          <tui-input
-            formControlName="loginUrlValue"
-          >
-            Login URL
-            <input
-              type="url"
-              tuiTextfield
-            />
-            <span class="tui-required"></span>
-          </tui-input>
-          <tui-error
-            formControlName="loginUrlValue"
-            [error]="[] | tuiFieldError | async"
-          ></tui-error>
-        </div>
         <div class="tui-form__buttons">
           <button
             tuiButton
             size="l"
             type="submit"
             class="tui-form__button"
-            (click)="createIdp()"
+            (click)="createSep()"
             [showLoader]="!!(createProcessing$ | async)"
           >
             Create

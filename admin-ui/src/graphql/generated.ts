@@ -22,6 +22,11 @@ export type CreateIdpInput = {
   name: Scalars['String']['input'];
 };
 
+export type CreateSepInput = {
+  name: Scalars['String']['input'];
+  redirectUrls: Array<Scalars['String']['input']>;
+};
+
 export type Idp = {
   __typename?: 'Idp';
   id: Scalars['ID']['output'];
@@ -37,7 +42,7 @@ export type IdpConnection = {
 
 export type IdpOrder = {
   direction: OrderDirection;
-  field?: InputMaybe<IdpOrderField>;
+  field: IdpOrderField;
 };
 
 export enum IdpOrderField {
@@ -48,11 +53,18 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Create idp from given input. If the creation fails, null is returned with errors. */
   createIdp?: Maybe<Idp>;
+  /** Create sep from given input. If the creation fails, null is returned with errors. */
+  createSep?: Maybe<Sep>;
 };
 
 
 export type MutationCreateIdpArgs = {
   createIdpInput: CreateIdpInput;
+};
+
+
+export type MutationCreateSepArgs = {
+  createSepInput: CreateSepInput;
 };
 
 export enum OrderDirection {
@@ -63,6 +75,7 @@ export enum OrderDirection {
 export type Query = {
   __typename?: 'Query';
   idps: IdpConnection;
+  seps: SepConnection;
 };
 
 
@@ -72,15 +85,34 @@ export type QueryIdpsArgs = {
   size: Scalars['Int']['input'];
 };
 
-export type IdpsQueryVariables = Exact<{
+
+export type QuerySepsArgs = {
+  orderBy: SepOrder;
   page: Scalars['Int']['input'];
   size: Scalars['Int']['input'];
-  field?: InputMaybe<IdpOrderField>;
+};
+
+export type Sep = {
+  __typename?: 'Sep';
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  redirectUrls: Array<Scalars['String']['output']>;
+};
+
+export type SepConnection = {
+  __typename?: 'SepConnection';
+  nodes: Array<Sep>;
+  totalCount: Scalars['Int']['output'];
+};
+
+export type SepOrder = {
   direction: OrderDirection;
-}>;
+  field: SepOrderField;
+};
 
-
-export type IdpsQuery = { __typename?: 'Query', idps: { __typename?: 'IdpConnection', totalCount: number, nodes: Array<{ __typename?: 'Idp', id: string, name: string, loginUrl: string }> } };
+export enum SepOrderField {
+  Name = 'NAME'
+}
 
 export type CreateIdpMutationVariables = Exact<{
   input: CreateIdpInput;
@@ -89,8 +121,75 @@ export type CreateIdpMutationVariables = Exact<{
 
 export type CreateIdpMutation = { __typename?: 'Mutation', createIdp?: { __typename?: 'Idp', id: string, name: string, loginUrl: string } | null };
 
+export type CreateSepMutationVariables = Exact<{
+  input: CreateSepInput;
+}>;
+
+
+export type CreateSepMutation = { __typename?: 'Mutation', createSep?: { __typename?: 'Sep', id: string, name: string, redirectUrls: Array<string> } | null };
+
+export type IdpsQueryVariables = Exact<{
+  page: Scalars['Int']['input'];
+  size: Scalars['Int']['input'];
+  field: IdpOrderField;
+  direction: OrderDirection;
+}>;
+
+
+export type IdpsQuery = { __typename?: 'Query', idps: { __typename?: 'IdpConnection', totalCount: number, nodes: Array<{ __typename?: 'Idp', id: string, name: string, loginUrl: string }> } };
+
+export type SepsQueryVariables = Exact<{
+  page: Scalars['Int']['input'];
+  size: Scalars['Int']['input'];
+  field: SepOrderField;
+  direction: OrderDirection;
+}>;
+
+
+export type SepsQuery = { __typename?: 'Query', seps: { __typename?: 'SepConnection', totalCount: number, nodes: Array<{ __typename?: 'Sep', id: string, name: string, redirectUrls: Array<string> }> } };
+
+export const CreateIdpDocument = gql`
+    mutation CreateIdp($input: CreateIdpInput!) {
+  createIdp(createIdpInput: $input) {
+    id
+    name
+    loginUrl
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateIdpGQL extends Apollo.Mutation<CreateIdpMutation, CreateIdpMutationVariables> {
+    override document = CreateIdpDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSepDocument = gql`
+    mutation CreateSep($input: CreateSepInput!) {
+  createSep(createSepInput: $input) {
+    id
+    name
+    redirectUrls
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSepGQL extends Apollo.Mutation<CreateSepMutation, CreateSepMutationVariables> {
+    override document = CreateSepDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const IdpsDocument = gql`
-    query Idps($page: Int!, $size: Int!, $field: IdpOrderField, $direction: OrderDirection!) {
+    query Idps($page: Int!, $size: Int!, $field: IdpOrderField!, $direction: OrderDirection!) {
   idps(page: $page, size: $size, orderBy: {field: $field, direction: $direction}) {
     nodes {
       id
@@ -112,12 +211,15 @@ export const IdpsDocument = gql`
       super(apollo);
     }
   }
-export const CreateIdpDocument = gql`
-    mutation CreateIdp($input: CreateIdpInput!) {
-  createIdp(createIdpInput: $input) {
-    id
-    name
-    loginUrl
+export const SepsDocument = gql`
+    query Seps($page: Int!, $size: Int!, $field: SepOrderField!, $direction: OrderDirection!) {
+  seps(page: $page, size: $size, orderBy: {field: $field, direction: $direction}) {
+    nodes {
+      id
+      name
+      redirectUrls
+    }
+    totalCount
   }
 }
     `;
@@ -125,8 +227,8 @@ export const CreateIdpDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class CreateIdpGQL extends Apollo.Mutation<CreateIdpMutation, CreateIdpMutationVariables> {
-    override document = CreateIdpDocument;
+  export class SepsGQL extends Apollo.Query<SepsQuery, SepsQueryVariables> {
+    override document = SepsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

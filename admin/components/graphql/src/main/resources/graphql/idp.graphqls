@@ -1,7 +1,7 @@
 extend type Query {
     idps(
         """
-        Number of elements to return.
+        Number of elements to find.
         """
         size: Int!
         """
@@ -28,7 +28,7 @@ enum IdpOrderField {
 
 input IdpOrder {
     direction: OrderDirection!
-    field: IdpOrderField
+    field: IdpOrderField!
 }
 
 input CreateIdpInput {

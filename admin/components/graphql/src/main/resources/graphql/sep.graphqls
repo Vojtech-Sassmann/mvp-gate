@@ -1,3 +1,20 @@
+extend type Query {
+    seps(
+        """
+        Number of elements to find.
+        """
+        size: Int!
+        """
+        Page number.
+        """
+        page: Int!
+        """
+        Order of searched elements.
+        """
+        orderBy: SepOrder!
+    ): SepConnection!
+}
+
 extend type Mutation {
     """
     Create sep from given input. If the creation fails, null is returned with errors.
@@ -6,7 +23,7 @@ extend type Mutation {
 }
 
 type Sep {
-    guid: String!
+    id: String!
     name: String!
     redirectUrls: [String!]!
 }
@@ -14,4 +31,18 @@ type Sep {
 input CreateSepInput {
     name: String!
     redirectUrls: [String!]!
+}
+
+enum SepOrderField {
+    NAME
+}
+
+input SepOrder {
+    direction: OrderDirection!
+    field: SepOrderField!
+}
+
+type SepConnection {
+    totalCount: Int!
+    nodes: [Sep!]!
 }
