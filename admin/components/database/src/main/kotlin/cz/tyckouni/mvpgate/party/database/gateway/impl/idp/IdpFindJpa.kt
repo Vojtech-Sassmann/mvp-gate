@@ -6,7 +6,6 @@ import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
-import cz.tyckouni.mvpgate.party.database.gateway.converter.impl.IdpJpaConverter
 import cz.tyckouni.mvpgate.party.database.repository.IdpRepository
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component
 @Component
 class IdpFindJpa(
     private val idpRepository: IdpRepository,
-    private val idpJpaConverter: IdpJpaConverter,
 ) : IdpFind {
     override fun find(pageRequest: PageRequest<IdpSort>): Page<Idp> {
         val pageable = org.springframework.data.domain.PageRequest.of(
@@ -28,7 +26,6 @@ class IdpFindJpa(
         )
 
         val jpaPage = idpRepository.findAll(pageable)
-            .map(idpJpaConverter::convert)
 
         return Page(jpaPage.content, jpaPage.totalElements)
     }
