@@ -1,5 +1,6 @@
 package cz.tyckouni.mvpgate.party.database.entity
 
+import cz.tyckouni.mvpgate.entity.Sep
 import jakarta.persistence.CollectionTable
 import jakarta.persistence.Column
 import jakarta.persistence.ElementCollection
@@ -14,19 +15,28 @@ import jakarta.persistence.JoinColumn
 class SepJpa(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    private var id: Long? = null,
 
     @Column(name = "guid", nullable = false, unique = true)
-    var guid: String,
+    private var guid: String,
 
     @Column(name = "name", nullable = false, unique = true)
-    var name: String,
+    private var name: String,
 
     @ElementCollection(targetClass = String::class, fetch = FetchType.EAGER)
     @CollectionTable(name = "sep_redirect_url", joinColumns = [JoinColumn(name = "sep_id")])
     @Column(name = "redirect_url", nullable = false)
-    var redirectUrls: Set<String> = HashSet(),
-) {
+    private var redirectUrls: Set<String> = HashSet(),
+) : Sep {
+
+    fun getId() = id
+
+    override fun getGuid() = guid
+
+    override fun getName() = name
+
+    override fun getRedirectUrls() = redirectUrls
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
