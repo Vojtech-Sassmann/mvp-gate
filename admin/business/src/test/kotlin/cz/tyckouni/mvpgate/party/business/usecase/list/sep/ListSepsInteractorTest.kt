@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.business.usecase.list.sep
 
 import cz.tyckouni.mvpgate.entity.SepFactory
-import cz.tyckouni.mvpgate.party.business.gateway.Seps
+import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepFind
 import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
@@ -13,8 +13,8 @@ import org.mockito.kotlin.argumentCaptor
 
 class ListSepsInteractorTest {
 
-    private val seps = mock(Seps::class.java)
-    private val listSepsInteractor = ListSepsInteractor(seps)
+    private val sepFind = mock(SepFind::class.java)
+    private val listSepsInteractor = ListSepsInteractor(sepFind)
     private val pageRequestCaptor = argumentCaptor<PageRequest<SepSort>>()
 
     @Test
@@ -26,7 +26,7 @@ class ListSepsInteractorTest {
         val expectedPage = Page(foundSeps, 2)
         val pageRequest = PageRequest(0, 10, SepSort.NAME, Order.DESCENDING)
 
-        `when`(seps.find(pageRequestCaptor.capture()))
+        `when`(sepFind.find(pageRequestCaptor.capture()))
             .thenReturn(expectedPage)
 
         val result = listSepsInteractor.list(pageRequest)

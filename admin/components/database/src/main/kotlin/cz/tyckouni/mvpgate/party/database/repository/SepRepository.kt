@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 /**
  * Jpa repository for [SepJpa]
  */
-interface SepJpaRepository : JpaRepository<SepJpa, Long> {
+interface SepRepository : JpaRepository<SepJpa, Long> {
 
     /**
      * Checks if there is a [SepJpa] with given [name]

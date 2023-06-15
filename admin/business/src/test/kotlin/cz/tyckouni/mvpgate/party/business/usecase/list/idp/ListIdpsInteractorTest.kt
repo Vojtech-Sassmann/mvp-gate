@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.business.usecase.list.idp
 
 import cz.tyckouni.mvpgate.entity.IdpFactory
-import cz.tyckouni.mvpgate.party.business.gateway.Idps
+import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpFind
 import cz.tyckouni.mvpgate.party.business.usecase.list.Order
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
@@ -16,8 +16,8 @@ import org.mockito.kotlin.argumentCaptor
  */
 internal class ListIdpsInteractorTest {
 
-    private val idps = mock(Idps::class.java)
-    private val listIdpsInteractor = ListIdpsInteractor(idps)
+    private val idpFind = mock(IdpFind::class.java)
+    private val listIdpsInteractor = ListIdpsInteractor(idpFind)
     private val pageRequestCaptor = argumentCaptor<PageRequest<IdpSort>>()
 
     @Test
@@ -29,7 +29,7 @@ internal class ListIdpsInteractorTest {
         val expectedPage = Page(foundIdps, 2)
         val pageRequest = PageRequest(0, 1, IdpSort.NAME, Order.ASCENDING)
 
-        `when`(idps.find(pageRequestCaptor.capture()))
+        `when`(idpFind.find(pageRequestCaptor.capture()))
             .thenReturn(expectedPage)
 
         val result = listIdpsInteractor.list(pageRequest)

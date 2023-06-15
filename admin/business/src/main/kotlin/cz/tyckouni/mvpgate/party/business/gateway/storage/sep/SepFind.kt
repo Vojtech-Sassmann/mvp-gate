@@ -1,26 +1,14 @@
-package cz.tyckouni.mvpgate.party.business.gateway
+package cz.tyckouni.mvpgate.party.business.gateway.storage.sep
 
 import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.party.business.usecase.list.Page
 import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
 import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
 
-interface Seps {
-
-    /**
-     * Persist the given [sep]
-     *
-     * @param sep to be saved
-     */
-    fun save(sep: Sep)
-
-    /**
-     * Check if a [Sep] exists with given [name]
-     *
-     * @param name used for the search
-     * @return true if exists, false otherwise
-     */
-    fun existsByName(name: String): Boolean
+/**
+ * Storage gateway for [Sep] find operation
+ */
+fun interface SepFind {
 
     /**
      * Fetch from storage a [Page] of [Sep] by given [pageRequest]
