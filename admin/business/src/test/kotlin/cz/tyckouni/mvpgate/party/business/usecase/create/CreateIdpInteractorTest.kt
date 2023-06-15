@@ -3,7 +3,8 @@ package cz.tyckouni.mvpgate.party.business.usecase.create
 import cz.tyckouni.mvpgate.entity.Idp
 import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
-import cz.tyckouni.mvpgate.party.business.gateway.Idps
+import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpExistsByName
+import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpSave
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
@@ -17,17 +18,18 @@ import org.mockito.kotlin.argumentCaptor
  */
 internal class CreateIdpInteractorTest {
 
-    private val idps = Mockito.mock(Idps::class.java)
+    private val idpSave = Mockito.mock(IdpSave::class.java)
+    private val idpExistsByName = Mockito.mock(IdpExistsByName::class.java)
     private val idpArgumentCaptor = argumentCaptor<Idp>()
     private val expectedIdp = IdpFactory.create("guid", "cool-idp", "http://localhost:8000")
     private val guidProvider = GuidProvider { expectedIdp.getGuid() }
 
-    private val createIdpInteractor = CreateIdpInteractor(idps, guidProvider)
+    private val createIdpInteractor = CreateIdpInteractor(idpSave, idpExistsByName, guidProvider)
 
     @Test
     fun `assigns correct fields`() {
         Mockito.doNothing()
-            .`when`(idps)
+            .`when`(idpSave)
             .save(idpArgumentCaptor.capture())
 
         val createIdpRequest = CreateIdpRequest(expectedIdp.getName(), expectedIdp.getLoginUrl())
@@ -62,7 +64,7 @@ internal class CreateIdpInteractorTest {
         val name = "orangeIdp"
         val createIdpRequest = CreateIdpRequest(name, expectedIdp.getLoginUrl())
 
-        `when`(idps.existsByName(name))
+        `when`(idpExistsByName.existsByName(name))
             .thenReturn(true)
 
         assertThatExceptionOfType(ValidationException::class.java)

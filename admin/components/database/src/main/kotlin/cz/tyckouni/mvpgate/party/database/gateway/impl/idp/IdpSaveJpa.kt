@@ -1,22 +1,20 @@
-package cz.tyckouni.mvpgate.party.database
+package cz.tyckouni.mvpgate.party.database.gateway.impl.idp
 
 import cz.tyckouni.mvpgate.entity.Idp
-import cz.tyckouni.mvpgate.entity.IdpFactory
-import cz.tyckouni.mvpgate.party.business.gateway.Idps
-import cz.tyckouni.mvpgate.party.business.usecase.list.Order
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
+import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpSave
 import cz.tyckouni.mvpgate.party.database.entity.IdpJpa
-import cz.tyckouni.mvpgate.party.database.repository.IdpJpaRepository
+import cz.tyckouni.mvpgate.party.database.repository.IdpRepository
 import jakarta.annotation.PostConstruct
-import org.springframework.data.domain.Sort
+import org.springframework.stereotype.Component
 import java.util.UUID
 
-class JpaIdps(
-    private val repository: IdpJpaRepository,
-) : Idps {
-
+/**
+ * Jpa implementation of the [IdpSave] gateway
+ */
+@Component
+class IdpSaveJpa(
+    private val idpRepository: IdpRepository,
+) : IdpSave {
     override fun save(idp: Idp) {
         val idpJpa = IdpJpa(
             guid = idp.getGuid(),
@@ -24,41 +22,12 @@ class JpaIdps(
             loginUrl = idp.getLoginUrl(),
         )
 
-        repository.save(idpJpa)
-    }
-
-    override fun find(pageRequest: PageRequest<IdpSort>): Page<Idp> {
-        val pageable = org.springframework.data.domain.PageRequest.of(
-            pageRequest.page,
-            pageRequest.size,
-            getSortDirection(pageRequest.order),
-            getSortProperty(pageRequest.sortProperty),
-        )
-
-        val jpaPage = repository.findAll(pageable)
-            .map { idp -> convertToIdp(idp) }
-
-        return Page(jpaPage.content, jpaPage.totalElements)
-    }
-
-    override fun existsByName(name: String): Boolean {
-        return repository.existsByName(name)
-    }
-
-    private fun convertToIdp(idp: IdpJpa): Idp = IdpFactory.create(idp.guid, idp.name, idp.loginUrl)
-
-    private fun getSortDirection(order: Order): Sort.Direction = when (order) {
-        Order.ASCENDING -> Sort.Direction.ASC
-        Order.DESCENDING -> Sort.Direction.DESC
-    }
-
-    private fun getSortProperty(idpSort: IdpSort): String = when (idpSort) {
-        IdpSort.NAME -> "name"
+        idpRepository.save(idpJpa)
     }
 
     @PostConstruct
     fun init() {
-        repository.saveAll(
+        idpRepository.saveAll(
             listOf(
                 IdpJpa(
                     guid = UUID.randomUUID().toString(),

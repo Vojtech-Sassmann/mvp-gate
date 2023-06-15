@@ -2,7 +2,8 @@ package cz.tyckouni.mvpgate.party.business.usecase.create
 
 import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.entity.SepFactory
-import cz.tyckouni.mvpgate.party.business.gateway.Seps
+import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepExistsByName
+import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepSave
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatExceptionOfType
@@ -14,17 +15,18 @@ import org.mockito.kotlin.argumentCaptor
 
 internal class CreateSepInteractorTest {
 
-    private val seps = mock(Seps::class.java)
+    private val sepSave = mock(SepSave::class.java)
+    private val sepExistsByName = mock(SepExistsByName::class.java)
     private val sepArgumentCaptor = argumentCaptor<Sep>()
     private val expectedSep = SepFactory.create("guid", "cool-sep", setOf("http://localhost:8000"))
     private val guidProvider = { "guid" }
 
-    private val createSepInteractor = CreateSepInteractor(seps, guidProvider)
+    private val createSepInteractor = CreateSepInteractor(sepSave, sepExistsByName, guidProvider)
 
     @Test
     fun `create persists correct sep from given input input`() {
         Mockito.doNothing()
-            .`when`(seps)
+            .`when`(sepSave)
             .save(sepArgumentCaptor.capture())
 
         val createSepRequest = CreateSepRequest(expectedSep.getName(), expectedSep.getRedirectUrls())
@@ -72,7 +74,7 @@ internal class CreateSepInteractorTest {
     fun `create fails for duplicate name`() {
         val duplicateName = "bank"
 
-        `when`(seps.existsByName(duplicateName))
+        `when`(sepExistsByName.existsByName(duplicateName))
             .thenReturn(true)
 
         val createSepRequest = CreateSepRequest(duplicateName, expectedSep.getRedirectUrls())
