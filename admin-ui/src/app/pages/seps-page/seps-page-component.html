@@ -1,0 +1,14 @@
+<h1>Service providers</h1>
+<app-sep-table
+  *ngIf="sepConnectionObservable"
+  [sepConnectionObservable]="sepConnectionObservable"
+  [loading]="sepLoading"
+  (pageChange)="pageChanged($event)"
+  (orderChange)="orderChanged($event)"
+  [direction]="direction"
+  [sortBy]="sortBy"
+  [page]="initPage"
+  [size]="initSize"
+  (add)="createSep()"
+>
+</app-sep-table>

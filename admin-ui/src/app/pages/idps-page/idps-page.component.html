@@ -1,0 +1,16 @@
+<h1>Identity Providers</h1>
+<tui-elastic-container class="container">
+  <app-idp-table
+    *ngIf="idpConnectionObservable"
+    [idpConnectionObservable]="idpConnectionObservable"
+    [loading]="idpLoading"
+    (pageChange)="pageChanged($event)"
+    (orderChange)="orderChanged($event)"
+    [direction]="direction"
+    [sortBy]="sortBy"
+    [page]="initPage"
+    [size]="initSize"
+    (add)="createIdp()"
+  >
+  </app-idp-table>
+</tui-elastic-container>

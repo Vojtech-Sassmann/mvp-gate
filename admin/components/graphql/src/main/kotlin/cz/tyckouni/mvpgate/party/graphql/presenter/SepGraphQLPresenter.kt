@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 class SepGraphQLPresenter {
 
     fun present(sep: Sep): SepDto = SepDto(
-        guid = sep.getGuid(),
+        id = sep.getGuid(),
         name = sep.getName(),
         redirectUrls = sep.getRedirectUrls(),
     )

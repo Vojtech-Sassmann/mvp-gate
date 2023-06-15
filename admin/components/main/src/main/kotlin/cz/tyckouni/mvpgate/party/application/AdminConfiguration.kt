@@ -1,6 +1,7 @@
 package cz.tyckouni.mvpgate.party.application
 
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
 import cz.tyckouni.mvpgate.party.business.gateway.Idps
 import cz.tyckouni.mvpgate.party.business.gateway.Seps
@@ -11,6 +12,8 @@ import cz.tyckouni.mvpgate.party.business.usecase.create.CreateSepUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
 import cz.tyckouni.mvpgate.party.business.usecase.list.idp.ListIdpsInteractor
+import cz.tyckouni.mvpgate.party.business.usecase.list.sep.ListSepsInteractor
+import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
 import cz.tyckouni.mvpgate.party.database.DatabaseConfiguration
 import cz.tyckouni.mvpgate.party.database.JpaIdps
 import cz.tyckouni.mvpgate.party.database.JpaSeps
@@ -44,6 +47,9 @@ class AdminConfiguration {
 
     @Bean
     fun listIdpsUseCase(idps: Idps): ListUseCase<Idp, IdpSort> = ListIdpsInteractor(idps)
+
+    @Bean
+    fun listSepsUseCase(seps: Seps): ListUseCase<Sep, SepSort> = ListSepsInteractor(seps)
 
     @Bean
     fun guidProvider(): GuidProvider = GuidProvider { UUID.randomUUID().toString() }

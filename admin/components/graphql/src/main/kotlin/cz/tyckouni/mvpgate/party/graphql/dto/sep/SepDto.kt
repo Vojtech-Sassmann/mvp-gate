@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.graphql.dto.sep
 
 class SepDto(
-    val guid: String,
+    val id: String,
     val name: String,
     val redirectUrls: Set<String>,
 )
