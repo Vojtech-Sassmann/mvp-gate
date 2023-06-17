@@ -1,9 +1,9 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
 import cz.tyckouni.mvpgate.entity.Sep
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
 import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.party.graphql.dto.SepConnection
 import cz.tyckouni.mvpgate.party.graphql.dto.SepOrder
 import cz.tyckouni.mvpgate.party.graphql.presenter.SepConnectionGraphQLPresenter

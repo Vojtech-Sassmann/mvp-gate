@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.dto
 
-import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 
 /**
  * Graphql representation of possible field which can be used to sort Seps

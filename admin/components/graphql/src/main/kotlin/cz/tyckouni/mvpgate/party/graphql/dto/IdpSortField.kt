@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.dto
 
-import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.IdpSort
 
 /**
  * Graphql representation of possible field which can be used to sort Idps

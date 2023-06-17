@@ -1,9 +1,9 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
 import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.IdpSort
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpConnection
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpOrder
 import cz.tyckouni.mvpgate.party.graphql.presenter.IdpConnectionGraphQLPresenter

@@ -13,11 +13,11 @@ import cz.tyckouni.mvpgate.party.business.usecase.create.CreateIdpInteractor
 import cz.tyckouni.mvpgate.party.business.usecase.create.CreateIdpUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.create.CreateSepInteractor
 import cz.tyckouni.mvpgate.party.business.usecase.create.CreateSepUseCase
+import cz.tyckouni.mvpgate.party.business.usecase.list.ListIdpsInteractor
+import cz.tyckouni.mvpgate.party.business.usecase.list.ListSepsInteractor
 import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.list.idp.IdpSort
-import cz.tyckouni.mvpgate.party.business.usecase.list.idp.ListIdpsInteractor
-import cz.tyckouni.mvpgate.party.business.usecase.list.sep.ListSepsInteractor
-import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.IdpSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

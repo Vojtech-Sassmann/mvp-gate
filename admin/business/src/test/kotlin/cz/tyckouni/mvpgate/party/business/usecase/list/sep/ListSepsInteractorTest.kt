@@ -2,9 +2,11 @@ package cz.tyckouni.mvpgate.party.business.usecase.list.sep
 
 import cz.tyckouni.mvpgate.entity.SepFactory
 import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepFind
-import cz.tyckouni.mvpgate.party.business.usecase.list.Order
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
+import cz.tyckouni.mvpgate.party.business.usecase.list.ListSepsInteractor
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Order
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock

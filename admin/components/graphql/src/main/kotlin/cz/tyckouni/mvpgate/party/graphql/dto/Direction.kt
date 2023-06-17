@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.dto
 
-import cz.tyckouni.mvpgate.party.business.usecase.list.Order
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Order
 
 /**
  * Direction of the order in GraphQL

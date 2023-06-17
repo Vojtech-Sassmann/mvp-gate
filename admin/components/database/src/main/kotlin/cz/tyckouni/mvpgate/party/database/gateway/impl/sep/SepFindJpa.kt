@@ -2,10 +2,10 @@ package cz.tyckouni.mvpgate.party.database.gateway.impl.sep
 
 import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepFind
-import cz.tyckouni.mvpgate.party.business.usecase.list.Order
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Order
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.party.database.repository.SepRepository
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component

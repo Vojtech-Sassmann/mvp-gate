@@ -1,10 +1,10 @@
-package cz.tyckouni.mvpgate.party.business.usecase.list.sep
+package cz.tyckouni.mvpgate.party.business.usecase.list
 
 import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepFind
-import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 
 /**
  * Interactor of the [ListUseCase] for [Sep] entity.

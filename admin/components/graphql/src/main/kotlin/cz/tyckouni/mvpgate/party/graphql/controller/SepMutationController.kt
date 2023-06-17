@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
-import cz.tyckouni.mvpgate.party.business.usecase.create.CreateSepRequest
+import cz.tyckouni.mvpgate.party.business.request.CreateSepRequest
 import cz.tyckouni.mvpgate.party.business.usecase.create.CreateSepUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.party.graphql.dto.sep.CreateSepInput

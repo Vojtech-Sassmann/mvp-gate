@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
-import cz.tyckouni.mvpgate.party.business.usecase.create.CreateIdpRequest
+import cz.tyckouni.mvpgate.party.business.request.CreateIdpRequest
 import cz.tyckouni.mvpgate.party.business.usecase.create.CreateIdpUseCase
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.party.graphql.dto.idp.CreateIdpInput

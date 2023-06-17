@@ -1,6 +1,10 @@
 package cz.tyckouni.mvpgate.party.business.usecase.list
 
-fun interface ListUseCase<T, S : Sort> {
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Sort
+
+fun interface ListUseCase<T, S : Sort<T>> {
 
     /**
      * Find a page of [T] by given [pageRequest]

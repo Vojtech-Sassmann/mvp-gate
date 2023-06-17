@@ -2,9 +2,11 @@ package cz.tyckouni.mvpgate.party.business.usecase.list.idp
 
 import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpFind
-import cz.tyckouni.mvpgate.party.business.usecase.list.Order
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
+import cz.tyckouni.mvpgate.party.business.usecase.list.ListIdpsInteractor
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.IdpSort
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Order
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock

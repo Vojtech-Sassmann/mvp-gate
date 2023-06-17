@@ -1,9 +1,9 @@
 package cz.tyckouni.mvpgate.party.business.gateway.storage.sep
 
 import cz.tyckouni.mvpgate.entity.Sep
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
-import cz.tyckouni.mvpgate.party.business.usecase.list.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.sep.SepSort
+import cz.tyckouni.mvpgate.party.business.request.PageRequest
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 
 /**
  * Storage gateway for [Sep] find operation

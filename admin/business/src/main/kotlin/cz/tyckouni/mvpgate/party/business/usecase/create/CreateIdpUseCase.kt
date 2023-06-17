@@ -1,6 +1,7 @@
 package cz.tyckouni.mvpgate.party.business.usecase.create
 
 import cz.tyckouni.mvpgate.entity.Idp
+import cz.tyckouni.mvpgate.party.business.request.CreateIdpRequest
 import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
 
 fun interface CreateIdpUseCase {

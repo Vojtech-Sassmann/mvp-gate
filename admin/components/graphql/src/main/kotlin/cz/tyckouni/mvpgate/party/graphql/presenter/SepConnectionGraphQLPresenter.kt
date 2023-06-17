@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.graphql.presenter
 
 import cz.tyckouni.mvpgate.entity.Sep
-import cz.tyckouni.mvpgate.party.business.usecase.list.Page
+import cz.tyckouni.mvpgate.party.business.usecase.list.sort.Page
 import cz.tyckouni.mvpgate.party.graphql.dto.SepConnection
 import org.springframework.stereotype.Component
 

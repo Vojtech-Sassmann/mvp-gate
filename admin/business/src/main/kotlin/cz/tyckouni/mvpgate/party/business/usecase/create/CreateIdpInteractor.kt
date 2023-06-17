@@ -5,6 +5,7 @@ import cz.tyckouni.mvpgate.entity.IdpFactory
 import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
 import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpExistsByName
 import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpSave
+import cz.tyckouni.mvpgate.party.business.request.CreateIdpRequest
 import cz.tyckouni.mvpgate.party.business.usecase.validation.UrlValidator
 import cz.tyckouni.mvpgate.party.business.usecase.validation.Validator
 
