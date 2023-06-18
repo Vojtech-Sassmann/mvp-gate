@@ -1,6 +1,5 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
-import cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest
 import cz.tyckouni.mvpgate.admin.business.usecase.create.CreateIdpUseCase
 import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.party.graphql.dto.idp.CreateIdpInput
@@ -24,7 +23,7 @@ class IdpMutationController(
     fun createIdp(@Argument createIdpInput: CreateIdpInput): IdpDto {
         try {
             val createdIdp = createIdpUseCase.create(
-                cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest(
+                cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput(
                     name = createIdpInput.name,
                     loginUrl = createIdpInput.loginUrl,
                 ),

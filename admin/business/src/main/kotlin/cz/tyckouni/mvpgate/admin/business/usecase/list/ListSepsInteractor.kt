@@ -10,7 +10,7 @@ import cz.tyckouni.mvpgate.entity.Sep
 class ListSepsInteractor(
     private val sepFind: cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepFind,
 ) : ListUseCase<Sep, SepSort> {
-    override fun list(pageRequest: cz.tyckouni.mvpgate.admin.business.request.PageRequest<SepSort>): Page<Sep> {
-        return sepFind.find(pageRequest)
+    override fun list(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<SepSort>): Page<Sep> {
+        return sepFind.find(pageInput)
     }
 }

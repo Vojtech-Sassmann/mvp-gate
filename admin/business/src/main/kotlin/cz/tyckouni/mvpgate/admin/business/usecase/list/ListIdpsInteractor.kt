@@ -10,7 +10,7 @@ import cz.tyckouni.mvpgate.entity.Idp
 class ListIdpsInteractor(
     private val idpFind: cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpFind,
 ) : ListUseCase<Idp, IdpSort> {
-    override fun list(pageRequest: cz.tyckouni.mvpgate.admin.business.request.PageRequest<IdpSort>): Page<Idp> {
-        return idpFind.find(pageRequest)
+    override fun list(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<IdpSort>): Page<Idp> {
+        return idpFind.find(pageInput)
     }
 }

@@ -16,5 +16,5 @@ fun interface CreateSepUseCase {
      * @throws ValidationException if some of the conditions is not met
      * @return created [Sep]
      */
-    fun create(createSepRequest: cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest): Sep
+    fun create(createSepInput: cz.tyckouni.mvpgate.admin.business.input.CreateSepInput): Sep
 }

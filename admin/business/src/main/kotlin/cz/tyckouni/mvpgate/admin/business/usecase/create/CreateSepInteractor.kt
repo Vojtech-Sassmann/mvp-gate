@@ -13,16 +13,16 @@ class CreateSepInteractor(
     private val sepExistsByName: cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepExistsByName,
     private val guidProvider: cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider,
 ) : CreateSepUseCase {
-    override fun create(createSepRequest: cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest): Sep {
+    override fun create(createSepInput: cz.tyckouni.mvpgate.admin.business.input.CreateSepInput): Sep {
         val validator = Validator()
-            .validate(createSepRequest.name.isNotBlank(), "name cannot be blank")
-            .validate(createSepRequest.redirectUrls.isNotEmpty(), "redirect urls cannot be empty")
+            .validate(createSepInput.name.isNotBlank(), "name cannot be blank")
+            .validate(createSepInput.redirectUrls.isNotEmpty(), "redirect urls cannot be empty")
             .validate(
-                !sepExistsByName.existsByName(createSepRequest.name),
-                "given name is not unique: '${createSepRequest.name}'",
+                !sepExistsByName.existsByName(createSepInput.name),
+                "given name is not unique: '${createSepInput.name}'",
             )
 
-        createSepRequest.redirectUrls.forEach { redirectUrl ->
+        createSepInput.redirectUrls.forEach { redirectUrl ->
             validator.validate(
                 UrlValidator.isValidUrl(redirectUrl),
                 "invalid redirect URL: '$redirectUrl'",
@@ -30,7 +30,7 @@ class CreateSepInteractor(
         }
 
         validator.handle()
-        val sep = SepFactory.create(guidProvider.newGuid(), createSepRequest.name, createSepRequest.redirectUrls)
+        val sep = SepFactory.create(guidProvider.newGuid(), createSepInput.name, createSepInput.redirectUrls)
 
         sepSave.save(sep)
 

@@ -1,7 +1,5 @@
 package cz.tyckouni.mvpgate.admin.business.usecase.list.idp
 
-import cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpFind
-import cz.tyckouni.mvpgate.admin.business.request.PageRequest
 import cz.tyckouni.mvpgate.admin.business.usecase.list.ListIdpsInteractor
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.IdpSort
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.Order
@@ -20,7 +18,7 @@ internal class ListIdpsInteractorTest {
 
     private val idpFind = mock(cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpFind::class.java)
     private val listIdpsInteractor = ListIdpsInteractor(idpFind)
-    private val pageRequestCaptor = argumentCaptor<cz.tyckouni.mvpgate.admin.business.request.PageRequest<IdpSort>>()
+    private val pageInputCaptor = argumentCaptor<cz.tyckouni.mvpgate.admin.business.input.PageInput<IdpSort>>()
 
     @Test
     fun list() {
@@ -29,17 +27,17 @@ internal class ListIdpsInteractorTest {
             IdpFactory.create("guid-o", "name-o", "https://login-o"),
         )
         val expectedPage = Page(foundIdps, 2)
-        val pageRequest = cz.tyckouni.mvpgate.admin.business.request.PageRequest(0, 1, IdpSort.NAME, Order.ASCENDING)
+        val pageInput = cz.tyckouni.mvpgate.admin.business.input.PageInput(0, 1, IdpSort.NAME, Order.ASCENDING)
 
-        `when`(idpFind.find(pageRequestCaptor.capture()))
+        `when`(idpFind.find(pageInputCaptor.capture()))
             .thenReturn(expectedPage)
 
-        val result = listIdpsInteractor.list(pageRequest)
+        val result = listIdpsInteractor.list(pageInput)
 
         assertThat(result)
             .usingRecursiveComparison()
             .isEqualTo(expectedPage)
-        assertThat(pageRequestCaptor.firstValue)
-            .isEqualTo(pageRequest)
+        assertThat(pageInputCaptor.firstValue)
+            .isEqualTo(pageInput)
     }
 }

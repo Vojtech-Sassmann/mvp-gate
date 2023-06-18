@@ -1,6 +1,5 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
-import cz.tyckouni.mvpgate.admin.business.request.PageRequest
 import cz.tyckouni.mvpgate.admin.business.usecase.list.ListUseCase
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.entity.Sep
@@ -23,7 +22,7 @@ class SepQueryController(
     @QueryMapping
     fun seps(@Argument size: Int, @Argument page: Int, @Argument orderBy: SepOrder): SepConnection {
         val idpPage = listSepsUseCase.list(
-            cz.tyckouni.mvpgate.admin.business.request.PageRequest(
+            cz.tyckouni.mvpgate.admin.business.input.PageInput(
                 page = page,
                 size = size,
                 sortProperty = orderBy.field.sepSort,

@@ -1,9 +1,5 @@
 package cz.tyckouni.mvpgate.admin.business.usecase.create
 
-import cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider
-import cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpExistsByName
-import cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpSave
-import cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest
 import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.entity.Idp
 import cz.tyckouni.mvpgate.entity.IdpFactory
@@ -34,11 +30,11 @@ internal class CreateIdpInteractorTest {
             .`when`(idpSave)
             .save(idpArgumentCaptor.capture())
 
-        val createIdpRequest = cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest(
+        val createIdpInput = cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput(
             expectedIdp.getName(),
             expectedIdp.getLoginUrl(),
         )
-        createIdpInteractor.create(createIdpRequest)
+        createIdpInteractor.create(createIdpInput)
         val savedIdp = idpArgumentCaptor.firstValue
 
         assertThat(savedIdp)
@@ -48,35 +44,35 @@ internal class CreateIdpInteractorTest {
 
     @Test
     fun `fails for invalid login url`() {
-        val createIdpRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest(expectedIdp.getName(), "http://localhost:900 ")
+        val createIdpInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput(expectedIdp.getName(), "http://localhost:900 ")
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createIdpInteractor.create(createIdpRequest) }
+            .isThrownBy { createIdpInteractor.create(createIdpInput) }
             .withMessageContaining("Validation failed: ['invalid login URL: 'http://localhost:900 '']")
     }
 
     @Test
     fun `fails for empty name`() {
-        val createIdpRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest("", expectedIdp.getLoginUrl())
+        val createIdpInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput("", expectedIdp.getLoginUrl())
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createIdpInteractor.create(createIdpRequest) }
+            .isThrownBy { createIdpInteractor.create(createIdpInput) }
             .withMessageContaining("Validation failed: ['name cannot be blank']")
     }
 
     @Test
     fun `fails for an existing idp with given name`() {
         val name = "orangeIdp"
-        val createIdpRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest(name, expectedIdp.getLoginUrl())
+        val createIdpInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput(name, expectedIdp.getLoginUrl())
 
         `when`(idpExistsByName.existsByName(name))
             .thenReturn(true)
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createIdpInteractor.create(createIdpRequest) }
+            .isThrownBy { createIdpInteractor.create(createIdpInput) }
             .withMessageContaining("Validation failed: ['given name is not unique: 'orangeIdp'']")
     }
 }

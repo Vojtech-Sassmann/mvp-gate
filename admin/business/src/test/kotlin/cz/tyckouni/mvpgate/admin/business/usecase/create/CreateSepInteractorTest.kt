@@ -1,8 +1,5 @@
 package cz.tyckouni.mvpgate.admin.business.usecase.create
 
-import cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepExistsByName
-import cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepSave
-import cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest
 import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.entity.Sep
 import cz.tyckouni.mvpgate.entity.SepFactory
@@ -30,12 +27,12 @@ internal class CreateSepInteractorTest {
             .`when`(sepSave)
             .save(sepArgumentCaptor.capture())
 
-        val createSepRequest = cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest(
+        val createSepInput = cz.tyckouni.mvpgate.admin.business.input.CreateSepInput(
             expectedSep.getName(),
             expectedSep.getRedirectUrls(),
         )
 
-        val returnedSep = createSepInteractor.create(createSepRequest)
+        val returnedSep = createSepInteractor.create(createSepInput)
         val savedSep = sepArgumentCaptor.firstValue
 
         assertThat(savedSep)
@@ -49,31 +46,31 @@ internal class CreateSepInteractorTest {
 
     @Test
     fun `create fails for empty name`() {
-        val createSepRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest(" ", expectedSep.getRedirectUrls())
+        val createSepInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateSepInput(" ", expectedSep.getRedirectUrls())
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createSepInteractor.create(createSepRequest) }
+            .isThrownBy { createSepInteractor.create(createSepInput) }
             .withMessageContaining("'name cannot be blank'")
     }
 
     @Test
     fun `create fails for empty redirectUrl`() {
-        val createSepRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest(expectedSep.getName(), setOf())
+        val createSepInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateSepInput(expectedSep.getName(), setOf())
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createSepInteractor.create(createSepRequest) }
+            .isThrownBy { createSepInteractor.create(createSepInput) }
             .withMessageContaining("'redirect urls cannot be empty'")
     }
 
     @Test
     fun `create fails for invalid redirectUrl`() {
-        val createSepRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest(expectedSep.getName(), setOf("http:/invalid"))
+        val createSepInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateSepInput(expectedSep.getName(), setOf("http:/invalid"))
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createSepInteractor.create(createSepRequest) }
+            .isThrownBy { createSepInteractor.create(createSepInput) }
             .withMessageContaining("'invalid redirect URL: 'http:/invalid''")
     }
 
@@ -84,11 +81,11 @@ internal class CreateSepInteractorTest {
         `when`(sepExistsByName.existsByName(duplicateName))
             .thenReturn(true)
 
-        val createSepRequest =
-            cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest(duplicateName, expectedSep.getRedirectUrls())
+        val createSepInput =
+            cz.tyckouni.mvpgate.admin.business.input.CreateSepInput(duplicateName, expectedSep.getRedirectUrls())
 
         assertThatExceptionOfType(ValidationException::class.java)
-            .isThrownBy { createSepInteractor.create(createSepRequest) }
+            .isThrownBy { createSepInteractor.create(createSepInput) }
             .withMessage("Validation failed: ['given name is not unique: 'bank'']")
     }
 }

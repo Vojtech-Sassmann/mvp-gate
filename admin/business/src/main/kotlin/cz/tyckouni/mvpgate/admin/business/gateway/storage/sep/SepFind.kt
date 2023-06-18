@@ -10,9 +10,9 @@ import cz.tyckouni.mvpgate.entity.Sep
 fun interface SepFind {
 
     /**
-     * Fetch from storage a [Page] of [Sep] by given [pageRequest]
+     * Fetch from storage a [Page] of [Sep] by given [pageInput]
      *
      * @return found [Page]
      */
-    fun find(pageRequest: cz.tyckouni.mvpgate.admin.business.request.PageRequest<SepSort>): Page<Sep>
+    fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<SepSort>): Page<Sep>
 }

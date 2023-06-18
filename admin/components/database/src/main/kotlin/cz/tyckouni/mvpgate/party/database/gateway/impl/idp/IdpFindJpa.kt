@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component
 class IdpFindJpa(
     private val idpRepository: IdpRepository,
 ) : cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpFind {
-    override fun find(pageRequest: cz.tyckouni.mvpgate.admin.business.request.PageRequest<IdpSort>): Page<Idp> {
+    override fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<IdpSort>): Page<Idp> {
         val pageable = org.springframework.data.domain.PageRequest.of(
-            pageRequest.page,
-            pageRequest.size,
-            getSortDirection(pageRequest.order),
-            getSortProperty(pageRequest.sortProperty),
+            pageInput.page,
+            pageInput.size,
+            getSortDirection(pageInput.order),
+            getSortProperty(pageInput.sortProperty),
         )
 
         val jpaPage = idpRepository.findAll(pageable)

@@ -10,9 +10,9 @@ import cz.tyckouni.mvpgate.entity.Idp
 fun interface IdpFind {
 
     /**
-     * Fetch from storage a [Page] of [Idp] by given [pageRequest]
+     * Fetch from storage a [Page] of [Idp] by given [pageInput]
      *
      * @return found [Page]
      */
-    fun find(pageRequest: cz.tyckouni.mvpgate.admin.business.request.PageRequest<IdpSort>): Page<Idp>
+    fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<IdpSort>): Page<Idp>
 }

@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component
 class SepFindJpa(
     private val sepRepository: SepRepository,
 ) : cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepFind {
-    override fun find(pageRequest: cz.tyckouni.mvpgate.admin.business.request.PageRequest<SepSort>): Page<Sep> {
+    override fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<SepSort>): Page<Sep> {
         val pageable = org.springframework.data.domain.PageRequest.of(
-            pageRequest.page,
-            pageRequest.size,
-            getSortDirection(pageRequest.order),
-            getSortProperty(pageRequest.sortProperty),
+            pageInput.page,
+            pageInput.size,
+            getSortDirection(pageInput.order),
+            getSortProperty(pageInput.sortProperty),
         )
 
         val jpaPage = sepRepository.findAll(pageable)

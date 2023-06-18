@@ -6,7 +6,7 @@ import cz.tyckouni.mvpgate.entity.Idp
 fun interface CreateIdpUseCase {
 
     /**
-     * Creates new [Idp] from given [createIdpRequest]
+     * Creates new [Idp] from given [createIdpInput]
      *
      * The new idp must have:
      * - unique name
@@ -15,5 +15,5 @@ fun interface CreateIdpUseCase {
      * @throws ValidationException if some of the validation conditions is not met
      * @return created [Idp] with guid set
      */
-    fun create(createIdpRequest: cz.tyckouni.mvpgate.admin.business.request.CreateIdpRequest): Idp
+    fun create(createIdpInput: cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput): Idp
 }
