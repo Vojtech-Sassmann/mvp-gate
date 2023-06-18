@@ -1,6 +1,9 @@
 package cz.tyckouni.mvpgate.entity
 
-class CommonSep(
+/**
+ * Basic implementation of the [Sep] entity
+ */
+internal class SepImpl(
     private val guid: String,
     private val name: String,
     private val redirectUrls: Set<String>,

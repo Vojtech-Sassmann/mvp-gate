@@ -5,6 +5,6 @@ package cz.tyckouni.mvpgate.entity
  */
 class IdpFactory {
     companion object {
-        fun create(guid: String, name: String, loginUrl: String): Idp = CommonIdp(guid, name, loginUrl)
+        fun create(guid: String, name: String, loginUrl: String): Idp = IdpImpl(guid, name, loginUrl)
     }
 }

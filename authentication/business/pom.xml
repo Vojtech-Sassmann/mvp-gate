@@ -10,24 +10,17 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>mvp-gate-telemetry</artifactId>
+    <artifactId>mvp-gate-authentication-business</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-tracing-bridge-brave</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-instrumentation-grpc</artifactId>
+            <groupId>cz.tyckouni</groupId>
+            <artifactId>mvp-gate-entity</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
     </build>
 </project>

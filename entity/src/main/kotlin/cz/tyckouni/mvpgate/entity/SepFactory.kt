@@ -5,6 +5,6 @@ package cz.tyckouni.mvpgate.entity
  */
 class SepFactory {
     companion object {
-        fun create(guid: String, name: String, redirectUrls: Set<String>): Sep = CommonSep(guid, name, redirectUrls)
+        fun create(guid: String, name: String, redirectUrls: Set<String>): Sep = SepImpl(guid, name, redirectUrls)
     }
 }

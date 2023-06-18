@@ -21,10 +21,11 @@
 		<module>admin/components/graphql</module>
 		<module>admin/components/grpc</module>
 		<module>admin/components/main</module>
+		<module>authentication/business</module>
 		<module>common/grpc</module>
 		<module>common/telemetry</module>
 		<module>entity</module>
-	</modules>
+    </modules>
     <properties>
 	    
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -129,6 +130,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-stdlib</artifactId>
+			<version>${kotlin.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib-jdk8</artifactId>
