@@ -1,9 +1,9 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
+import cz.tyckouni.mvpgate.admin.business.request.PageRequest
+import cz.tyckouni.mvpgate.admin.business.usecase.list.ListUseCase
+import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.IdpSort
 import cz.tyckouni.mvpgate.entity.Idp
-import cz.tyckouni.mvpgate.party.business.request.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.list.sort.IdpSort
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpConnection
 import cz.tyckouni.mvpgate.party.graphql.dto.IdpOrder
 import cz.tyckouni.mvpgate.party.graphql.presenter.IdpConnectionGraphQLPresenter
@@ -23,7 +23,7 @@ class IdpQueryController(
     @QueryMapping
     fun idps(@Argument size: Int, @Argument page: Int, @Argument orderBy: IdpOrder): IdpConnection {
         val idpPage = listIdpsUseCase.list(
-            PageRequest(
+            cz.tyckouni.mvpgate.admin.business.request.PageRequest(
                 page = page,
                 size = size,
                 sortProperty = orderBy.field.idpSort,

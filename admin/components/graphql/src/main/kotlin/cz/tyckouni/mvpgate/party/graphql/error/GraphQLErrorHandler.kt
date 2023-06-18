@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.error
 
-import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationError
+import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationError
 import graphql.GraphQLError
 import graphql.GraphqlErrorBuilder
 import graphql.schema.DataFetchingEnvironment

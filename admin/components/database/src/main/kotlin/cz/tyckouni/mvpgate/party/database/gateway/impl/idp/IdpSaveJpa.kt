@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.database.gateway.impl.idp
 
+import cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpSave
 import cz.tyckouni.mvpgate.entity.Idp
-import cz.tyckouni.mvpgate.party.business.gateway.storage.idp.IdpSave
 import cz.tyckouni.mvpgate.party.database.entity.IdpJpa
 import cz.tyckouni.mvpgate.party.database.repository.IdpRepository
 import jakarta.annotation.PostConstruct
@@ -14,7 +14,7 @@ import java.util.UUID
 @Component
 class IdpSaveJpa(
     private val idpRepository: IdpRepository,
-) : IdpSave {
+) : cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpSave {
     override fun save(idp: Idp) {
         val idpJpa = IdpJpa(
             guid = idp.getGuid(),

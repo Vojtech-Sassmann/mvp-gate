@@ -1,8 +1,8 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
-import cz.tyckouni.mvpgate.party.business.request.CreateSepRequest
-import cz.tyckouni.mvpgate.party.business.usecase.create.CreateSepUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.validation.ValidationException
+import cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest
+import cz.tyckouni.mvpgate.admin.business.usecase.create.CreateSepUseCase
+import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.party.graphql.dto.sep.CreateSepInput
 import cz.tyckouni.mvpgate.party.graphql.dto.sep.SepDto
 import cz.tyckouni.mvpgate.party.graphql.error.GraphQLValidationException
@@ -19,7 +19,10 @@ class SepMutationController(
     @MutationMapping
     fun createSep(@Argument createSepInput: CreateSepInput): SepDto {
         try {
-            val createSepRequest = CreateSepRequest(createSepInput.name, createSepInput.redirectUrls)
+            val createSepRequest = cz.tyckouni.mvpgate.admin.business.request.CreateSepRequest(
+                createSepInput.name,
+                createSepInput.redirectUrls,
+            )
             val createdSep = createSepUseCase.create(createSepRequest)
 
             return sepGraphQLPresenter.present(createdSep)

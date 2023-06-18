@@ -1,9 +1,9 @@
 package cz.tyckouni.mvpgate.party.graphql.controller
 
+import cz.tyckouni.mvpgate.admin.business.request.PageRequest
+import cz.tyckouni.mvpgate.admin.business.usecase.list.ListUseCase
+import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.entity.Sep
-import cz.tyckouni.mvpgate.party.business.request.PageRequest
-import cz.tyckouni.mvpgate.party.business.usecase.list.ListUseCase
-import cz.tyckouni.mvpgate.party.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.party.graphql.dto.SepConnection
 import cz.tyckouni.mvpgate.party.graphql.dto.SepOrder
 import cz.tyckouni.mvpgate.party.graphql.presenter.SepConnectionGraphQLPresenter
@@ -23,7 +23,7 @@ class SepQueryController(
     @QueryMapping
     fun seps(@Argument size: Int, @Argument page: Int, @Argument orderBy: SepOrder): SepConnection {
         val idpPage = listSepsUseCase.list(
-            PageRequest(
+            cz.tyckouni.mvpgate.admin.business.request.PageRequest(
                 page = page,
                 size = size,
                 sortProperty = orderBy.field.sepSort,

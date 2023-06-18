@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.database.gateway.impl.sep
 
-import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepExistsByName
+import cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepExistsByName
 import cz.tyckouni.mvpgate.party.database.repository.SepRepository
 import org.springframework.stereotype.Component
 
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component
 @Component
 class SepExistsByNameJpa(
     private val sepRepository: SepRepository,
-) : SepExistsByName {
+) : cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepExistsByName {
     override fun existsByName(name: String): Boolean = sepRepository.existsByName(name)
 }

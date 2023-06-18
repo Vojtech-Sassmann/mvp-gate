@@ -1,6 +1,6 @@
 package cz.tyckouni.mvpgate.party.application
 
-import cz.tyckouni.mvpgate.party.business.gateway.GuidProvider
+import cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider
 import cz.tyckouni.mvpgate.party.database.DatabaseConfiguration
 import cz.tyckouni.mvpgate.party.graphql.GraphQLConfiguration
 import org.springframework.context.annotation.Bean
@@ -23,7 +23,8 @@ import java.util.UUID
 class AdminConfiguration {
 
     @Bean
-    fun guidProvider(): GuidProvider = GuidProvider { UUID.randomUUID().toString() }
+    fun guidProvider(): cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider =
+        cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider { UUID.randomUUID().toString() }
 
     @Bean
     fun corsConfigurer(): WebMvcConfigurer = object : WebMvcConfigurer {

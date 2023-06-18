@@ -1,7 +1,7 @@
 package cz.tyckouni.mvpgate.party.database.gateway.impl.sep
 
+import cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepSave
 import cz.tyckouni.mvpgate.entity.Sep
-import cz.tyckouni.mvpgate.party.business.gateway.storage.sep.SepSave
 import cz.tyckouni.mvpgate.party.database.entity.SepJpa
 import cz.tyckouni.mvpgate.party.database.repository.SepRepository
 import jakarta.annotation.PostConstruct
@@ -14,7 +14,7 @@ import java.util.UUID
 @Component
 class SepSaveJpa(
     private val sepRepository: SepRepository,
-) : SepSave {
+) : cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepSave {
     override fun save(sep: Sep) {
         val sepJpa = SepJpa(
             guid = sep.getGuid(),
