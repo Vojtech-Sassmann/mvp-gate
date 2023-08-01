@@ -1,9 +1,10 @@
-package cz.tyckouni.mvpgate.party.graphql.controller
+package cz.tyckouni.mvpgate.party.graphql.controller.mutation
 
+import cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput
 import cz.tyckouni.mvpgate.admin.business.usecase.create.CreateIdpUseCase
 import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
-import cz.tyckouni.mvpgate.party.graphql.dto.idp.CreateIdpInput
-import cz.tyckouni.mvpgate.party.graphql.dto.idp.IdpDto
+import cz.tyckouni.mvpgate.party.graphql.dto.idp.CreateIdpGraphQLInput
+import cz.tyckouni.mvpgate.party.graphql.dto.idp.IdpGraphQL
 import cz.tyckouni.mvpgate.party.graphql.error.GraphQLValidationException
 import cz.tyckouni.mvpgate.party.graphql.presenter.IdpGraphQLPresenter
 import org.springframework.graphql.data.method.annotation.Argument
@@ -14,18 +15,18 @@ import org.springframework.stereotype.Controller
  * GraphQL controller handling idp-related mutations.
  */
 @Controller
-class IdpMutationController(
-    val idpGraphQLPresenter: IdpGraphQLPresenter,
-    val createIdpUseCase: CreateIdpUseCase,
+class CreateIdpMutationController(
+    private val idpGraphQLPresenter: IdpGraphQLPresenter,
+    private val createIdpUseCase: CreateIdpUseCase,
 ) {
 
     @MutationMapping
-    fun createIdp(@Argument createIdpInput: CreateIdpInput): IdpDto {
+    fun createIdp(@Argument createIdpGraphQlInput: CreateIdpGraphQLInput): IdpGraphQL {
         try {
             val createdIdp = createIdpUseCase.create(
-                cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput(
-                    name = createIdpInput.name,
-                    loginUrl = createIdpInput.loginUrl,
+                CreateIdpInput(
+                    name = createIdpGraphQlInput.name,
+                    loginUrl = createIdpGraphQlInput.loginUrl,
                 ),
             )
 

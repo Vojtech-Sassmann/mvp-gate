@@ -1,10 +1,6 @@
 package cz.tyckouni.mvpgate.party.graphql.dto.idp
 
-/**
- * Graphql DTO for Idp
- */
-data class IdpDto(
+data class CreateIdpGraphQLInput(
     val name: String,
-    val id: String,
     val loginUrl: String,
 )

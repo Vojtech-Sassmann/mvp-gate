@@ -1,5 +1,6 @@
-package cz.tyckouni.mvpgate.party.graphql.controller
+package cz.tyckouni.mvpgate.party.graphql.controller.query
 
+import cz.tyckouni.mvpgate.admin.business.input.PageInput
 import cz.tyckouni.mvpgate.admin.business.usecase.list.ListUseCase
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.IdpSort
 import cz.tyckouni.mvpgate.entity.Idp
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Controller
  * Graphql controller for Idp related queries
  */
 @Controller
-class IdpQueryController(
+class IdpsQueryController(
     private val listIdpsUseCase: ListUseCase<Idp, IdpSort>,
     private val idpConnectionGraphQLPresenter: IdpConnectionGraphQLPresenter,
 ) {
@@ -22,7 +23,7 @@ class IdpQueryController(
     @QueryMapping
     fun idps(@Argument size: Int, @Argument page: Int, @Argument orderBy: IdpOrder): IdpConnection {
         val idpPage = listIdpsUseCase.list(
-            cz.tyckouni.mvpgate.admin.business.input.PageInput(
+            PageInput(
                 page = page,
                 size = size,
                 sortProperty = orderBy.field.idpSort,

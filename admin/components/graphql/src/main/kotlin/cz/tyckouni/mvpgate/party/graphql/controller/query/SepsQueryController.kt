@@ -1,5 +1,6 @@
-package cz.tyckouni.mvpgate.party.graphql.controller
+package cz.tyckouni.mvpgate.party.graphql.controller.query
 
+import cz.tyckouni.mvpgate.admin.business.input.PageInput
 import cz.tyckouni.mvpgate.admin.business.usecase.list.ListUseCase
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.entity.Sep
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Controller
  * Graphql controller for Sep related queries
  */
 @Controller
-class SepQueryController(
+class SepsQueryController(
     private val listSepsUseCase: ListUseCase<Sep, SepSort>,
     private val sepConnectionGraphQLPresenter: SepConnectionGraphQLPresenter,
 ) {
@@ -22,7 +23,7 @@ class SepQueryController(
     @QueryMapping
     fun seps(@Argument size: Int, @Argument page: Int, @Argument orderBy: SepOrder): SepConnection {
         val idpPage = listSepsUseCase.list(
-            cz.tyckouni.mvpgate.admin.business.input.PageInput(
+            PageInput(
                 page = page,
                 size = size,
                 sortProperty = orderBy.field.sepSort,
