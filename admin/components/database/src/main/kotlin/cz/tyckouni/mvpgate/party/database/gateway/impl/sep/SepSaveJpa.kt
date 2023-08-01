@@ -14,7 +14,7 @@ import java.util.UUID
 @Component
 class SepSaveJpa(
     private val sepRepository: SepRepository,
-) : cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepSave {
+) : SepSave {
     override fun save(sep: Sep) {
         val sepJpa = SepJpa(
             guid = sep.getGuid(),

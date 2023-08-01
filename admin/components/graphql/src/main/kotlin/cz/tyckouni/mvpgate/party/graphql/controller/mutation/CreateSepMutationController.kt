@@ -17,7 +17,7 @@ class CreateSepMutationController(
     private val createSepUseCase: CreateSepUseCase,
 ) {
     @MutationMapping
-    fun createSep(@Argument createSepGraphQlInput: CreateSepGraphQLInput): SepGraphQL {
+    fun createSep(@Argument("createSepInput") createSepGraphQlInput: CreateSepGraphQLInput): SepGraphQL {
         try {
             val createSepInput = CreateSepInput(
                 createSepGraphQlInput.name,

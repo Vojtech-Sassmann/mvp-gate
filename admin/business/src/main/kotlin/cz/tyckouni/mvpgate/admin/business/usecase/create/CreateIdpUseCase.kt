@@ -1,5 +1,6 @@
 package cz.tyckouni.mvpgate.admin.business.usecase.create
 
+import cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput
 import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.entity.Idp
 
@@ -15,5 +16,5 @@ fun interface CreateIdpUseCase {
      * @throws ValidationException if some of the validation conditions is not met
      * @return created [Idp] with guid set
      */
-    fun create(createIdpInput: cz.tyckouni.mvpgate.admin.business.input.CreateIdpInput): Idp
+    fun create(createIdpInput: CreateIdpInput): Idp
 }

@@ -1,5 +1,6 @@
 package cz.tyckouni.mvpgate.admin.business.usecase.create
 
+import cz.tyckouni.mvpgate.admin.business.input.CreateSepInput
 import cz.tyckouni.mvpgate.admin.business.usecase.validation.ValidationException
 import cz.tyckouni.mvpgate.entity.Sep
 
@@ -16,5 +17,5 @@ fun interface CreateSepUseCase {
      * @throws ValidationException if some of the conditions is not met
      * @return created [Sep]
      */
-    fun create(createSepInput: cz.tyckouni.mvpgate.admin.business.input.CreateSepInput): Sep
+    fun create(createSepInput: CreateSepInput): Sep
 }

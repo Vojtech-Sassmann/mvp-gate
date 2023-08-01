@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component
 @Component
 class SepExistsByNameJpa(
     private val sepRepository: SepRepository,
-) : cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepExistsByName {
+) : SepExistsByName {
     override fun existsByName(name: String): Boolean = sepRepository.existsByName(name)
 }

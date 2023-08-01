@@ -23,8 +23,8 @@ import java.util.UUID
 class AdminConfiguration {
 
     @Bean
-    fun guidProvider(): cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider =
-        cz.tyckouni.mvpgate.admin.business.gateway.GuidProvider { UUID.randomUUID().toString() }
+    fun guidProvider(): GuidProvider =
+        GuidProvider { UUID.randomUUID().toString() }
 
     @Bean
     fun corsConfigurer(): WebMvcConfigurer = object : WebMvcConfigurer {

@@ -1,5 +1,6 @@
 package cz.tyckouni.mvpgate.admin.business.gateway.storage.idp
 
+import cz.tyckouni.mvpgate.admin.business.input.PageInput
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.IdpSort
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.Page
 import cz.tyckouni.mvpgate.entity.Idp
@@ -14,5 +15,5 @@ fun interface IdpFind {
      *
      * @return found [Page]
      */
-    fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<IdpSort>): Page<Idp>
+    fun find(pageInput: PageInput<IdpSort>): Page<Idp>
 }

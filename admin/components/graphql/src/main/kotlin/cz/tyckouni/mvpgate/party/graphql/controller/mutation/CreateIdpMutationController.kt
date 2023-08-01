@@ -21,7 +21,7 @@ class CreateIdpMutationController(
 ) {
 
     @MutationMapping
-    fun createIdp(@Argument createIdpGraphQlInput: CreateIdpGraphQLInput): IdpGraphQL {
+    fun createIdp(@Argument("createIdpInput") createIdpGraphQlInput: CreateIdpGraphQLInput): IdpGraphQL {
         try {
             val createdIdp = createIdpUseCase.create(
                 CreateIdpInput(

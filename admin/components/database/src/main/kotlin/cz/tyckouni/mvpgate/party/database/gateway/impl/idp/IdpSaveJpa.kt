@@ -14,7 +14,7 @@ import java.util.UUID
 @Component
 class IdpSaveJpa(
     private val idpRepository: IdpRepository,
-) : cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpSave {
+) : IdpSave {
     override fun save(idp: Idp) {
         val idpJpa = IdpJpa(
             guid = idp.getGuid(),

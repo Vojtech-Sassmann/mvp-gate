@@ -1,5 +1,7 @@
 package cz.tyckouni.mvpgate.party.database.gateway.impl.sep
 
+import cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepFind
+import cz.tyckouni.mvpgate.admin.business.input.PageInput
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.Order
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.Page
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.SepSort
@@ -14,8 +16,8 @@ import org.springframework.stereotype.Component
 @Component
 class SepFindJpa(
     private val sepRepository: SepRepository,
-) : cz.tyckouni.mvpgate.admin.business.gateway.storage.sep.SepFind {
-    override fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<SepSort>): Page<Sep> {
+) : SepFind {
+    override fun find(pageInput: PageInput<SepSort>): Page<Sep> {
         val pageable = org.springframework.data.domain.PageRequest.of(
             pageInput.page,
             pageInput.size,

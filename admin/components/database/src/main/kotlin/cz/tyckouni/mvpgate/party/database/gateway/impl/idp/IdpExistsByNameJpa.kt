@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class IdpExistsByNameJpa(
     private val idpRepository: IdpRepository,
-) : cz.tyckouni.mvpgate.admin.business.gateway.storage.idp.IdpExistsByName {
+) : IdpExistsByName {
     override fun existsByName(name: String): Boolean {
         return idpRepository.existsByName(name)
     }

@@ -1,5 +1,6 @@
 package cz.tyckouni.mvpgate.admin.business.gateway.storage.sep
 
+import cz.tyckouni.mvpgate.admin.business.input.PageInput
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.Page
 import cz.tyckouni.mvpgate.admin.business.usecase.list.sort.SepSort
 import cz.tyckouni.mvpgate.entity.Sep
@@ -14,5 +15,5 @@ fun interface SepFind {
      *
      * @return found [Page]
      */
-    fun find(pageInput: cz.tyckouni.mvpgate.admin.business.input.PageInput<SepSort>): Page<Sep>
+    fun find(pageInput: PageInput<SepSort>): Page<Sep>
 }
